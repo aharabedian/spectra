@@ -29,6 +29,7 @@ export default defineConfig({
         ThemeProvider: './src/components/starlight/ThemeProvider.astro',
         ThemeSelect: './src/components/starlight/Empty.astro',
         Footer: './src/components/starlight/Footer.astro',
+        PageTitle: './src/components/starlight/PageTitle.astro',
       },
       routeMiddleware: './src/route-middleware.ts',
       sidebar: [

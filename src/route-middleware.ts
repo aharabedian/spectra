@@ -1,40 +1,39 @@
-// Each project's docs get a sidebar of their own, with the rest of Spectra linked below it, and
-// previous/next links that stay inside the project.
+// Each project's docs get a sidebar of their own and previous/next links that stay inside the project.
+// The switcher above the sidebar (Sidebar.astro) moves between the suite guide and the projects' docs,
+// keeping your place: from PRISM's Setup, LENS goes to LENS's Setup, or its Overview when it has none.
 import { defineRouteMiddleware, type StarlightRouteData } from '@astrojs/starlight/route-data';
 import { projectOfDoc, projects, u } from './lib/site';
 
 type Entry = StarlightRouteData['sidebar'][number];
 type Link = Extract<Entry, { type: 'link' }>;
 
-const link = (label: string, href: string, isCurrent = false): Link => ({
-  type: 'link', label, href, isCurrent, badge: undefined, attrs: {},
-});
-const group = (label: string, entries: Entry[]): Entry => ({
-  type: 'group', label, entries, collapsed: false, badge: undefined,
-});
+/** One tab of the docs switcher. */
+export type DocsTab = { id: string; label: string; href: string; isCurrent: boolean };
+
 const flatten = (entries: Entry[]): Link[] =>
   entries.flatMap((e) => (e.type === 'group' ? flatten(e.entries) : [e]));
 
 export const onRequest = defineRouteMiddleware((context) => {
   const route = context.locals.starlightRoute;
   const current = projectOfDoc(route.id);
-  const groups = route.sidebar;
+  const groupOf = (label: string) => {
+    const g = route.sidebar.find((e) => e.type === 'group' && e.label === label);
+    return g && g.type === 'group' ? g.entries : [];
+  };
 
-  let own: Entry[];
-  let rest: Entry;
-  if (current) {
-    const g = groups.find((e) => e.type === 'group' && e.label === current.name);
-    own = g && g.type === 'group' ? g.entries : [];
-    rest = group('Spectra', [
-      link('Putting the suite together', u('guide/')),
-      ...projects.filter((p) => p !== current).map((p) => link(`${p.name} docs`, u(`${p.id}/docs/`))),
-    ]);
-  } else {
-    const g = groups.find((e) => e.type === 'group' && e.label === 'Spectra');
-    own = g && g.type === 'group' ? g.entries : [];
-    rest = group('Projects', projects.map((p) => link(`${p.name} docs`, u(`${p.id}/docs/`))));
-  }
-  route.sidebar = [...own, rest];
+  // The page's name within its project ("setup" for prism/docs/setup), to find the same page elsewhere.
+  const page = current ? route.id.slice(`${current.id}/docs`.length).replace(/^\//, '') : '';
+  context.locals.spectraDocsTabs = [
+    { id: 'suite', label: 'Suite', href: u('guide/'), isCurrent: !current },
+    ...projects.map((p) => {
+      const same = u(`${p.id}/docs/${page ? `${page}/` : ''}`);
+      const has = flatten(groupOf(p.name)).some((l) => l.href === same);
+      return { id: p.id, label: p.name, href: has ? same : u(`${p.id}/docs/`), isCurrent: p === current };
+    }),
+  ];
+
+  const own = groupOf(current ? current.name : 'Spectra');
+  route.sidebar = own;
 
   const pages = flatten(own);
   const i = pages.findIndex((l) => l.isCurrent);

@@ -1,0 +1,25 @@
+---
+// The page title, with the docs it belongs to above it on narrow screens, where the sidebar (and its
+// switcher) is behind the menu button.
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import { projectOfDoc, u } from '../../lib/site';
+const route = Astro.locals.starlightRoute;
+const p = projectOfDoc(route.id);
+const showEyebrow = route.entry.data.template !== 'splash';
+---
+{showEyebrow && (
+  <a class="doc-eyebrow" href={p ? u(`${p.id}/docs/`) : u('guide/')}>
+    {p ? <><span class="navdot" style={`background: ${p.accent}`}></span>{p.name} docs</> : 'Suite docs'}
+  </a>
+)}
+<Default />
+<style>
+  .doc-eyebrow { display: none; }
+  @media (max-width: 50rem) {
+    .doc-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;
+      font-family: var(--sp-mono); font-size: 12.5px; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--sl-color-accent); text-decoration: none;
+    }
+  }
+</style>

@@ -192,11 +192,13 @@ function convertAlerts(md) {
 
 const transform = (md, p, src, ref) => convertAlerts(rewriteLinks(md, p, src, ref));
 
-/** Take the first "# Heading" as the title and drop it from the body. */
+/** Take the first "# Heading" as the title and drop it from the body. Titles are plain text on the site
+ *  (page title, sidebar, link text), so inline code and emphasis marks are dropped: `lens/1` → lens/1. */
 function splitTitle(md) {
   const m = md.match(/^\s*#\s+(.+?)\s*#*\s*$/m);
   if (!m) return { title: null, body: md };
-  return { title: m[1].trim(), body: md.replace(m[0], '').replace(/^\s*\n/, '') };
+  const title = m[1].replace(/`([^`]*)`/g, '$1').replace(/(\*\*?)(\S(?:.*?\S)?)\1/g, '$2').trim();
+  return { title, body: md.replace(m[0], '').replace(/^\s*\n/, '') };
 }
 
 const yaml = (s) => JSON.stringify(s);

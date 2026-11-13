@@ -38,14 +38,23 @@
 }
 @media (min-width: 50rem) and (max-width: 72rem) { .snav-gh { display: none; } }
 
-/* Sidebar head */
-.sb-head { display: flex; flex-direction: column; gap: 4px; padding: 4px 0 16px; margin-bottom: 8px; border-bottom: 1px solid var(--sp-line-soft); }
-.sb-name { font-family: var(--sp-mono); font-weight: 600; font-size: 15px; letter-spacing: 0.08em; color: var(--sl-color-accent); text-decoration: none; }
+/* Docs switcher: the suite guide and each project's docs, one tab each in its own color */
+.sb-tabs { display: grid; grid-template-columns: 0.8fr 1fr 0.9fr 1.05fr; gap: 1px; padding: 3px; margin-bottom: 14px; background: var(--sp-bg-2); border: 1px solid var(--sp-line); border-radius: 9px; }
+.sb-tab { --tab: var(--sp-text); display: flex; align-items: center; justify-content: center; gap: 5px; padding: 8px 0; border-radius: 6px; font-family: var(--sp-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; color: var(--sp-muted); text-decoration: none; }
+.sb-tab[data-tab='prism'] { --tab: var(--sp-prism); }
+.sb-tab[data-tab='lens'] { --tab: var(--sp-lens); }
+.sb-tab[data-tab='lumen'] { --tab: var(--sp-lumen); }
+.sb-tab[data-tab]:not([data-tab='suite'])::before { content: ''; width: 6px; height: 6px; border-radius: 2px; background: var(--tab); opacity: 0.55; }
+.sb-tab:hover { color: var(--sp-text); background: var(--sp-surface-2); }
+.sb-tab[aria-current] { color: var(--tab); background: var(--sp-surface-2); box-shadow: inset 0 -2px 0 var(--tab); }
+.sb-tab[aria-current]::before { opacity: 1; }
+
+/* Sidebar head: what the current docs are */
+.sb-head { display: flex; flex-direction: column; gap: 4px; padding: 0 0 14px; margin-bottom: 8px; border-bottom: 1px solid var(--sp-line-soft); }
 .sb-sub { font-size: 12.5px; color: var(--sp-muted); line-height: 1.4; }
 .sb-meta { display: flex; gap: 14px; font-family: var(--sp-mono); font-size: 12px; color: var(--sp-muted); padding-top: 6px; }
 .sb-meta a { color: var(--sp-text-3); text-decoration: none; }
 .sb-meta a:hover { color: var(--sp-text); }
-:root[data-project='suite'] .sb-name { color: var(--sp-text); }
 
 /* Sidebar links: quiet, with the current page marked by a bar in the project's color */
 .sidebar-content .large { font-size: 14.5px; font-weight: 500; color: var(--sp-text-2); }
