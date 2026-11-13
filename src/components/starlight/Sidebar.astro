@@ -1,25 +1,28 @@
 ---
-// The docs sidebar: which project you're in, then its pages (filtered in route-middleware.ts).
+// The docs sidebar: a switcher between the suite guide and each project's docs (tabs from
+// route-middleware.ts, which keeps your place across projects), then the current project's pages.
 import Default from '@astrojs/starlight/components/Sidebar.astro';
 import { projectOfDoc, u, version } from '../../lib/site';
 const p = projectOfDoc(Astro.locals.starlightRoute.id);
+const tabs = Astro.locals.spectraDocsTabs ?? [];
 ---
+<nav class="sb-tabs" aria-label="Docs for">
+  {tabs.map((t) => (
+    <a class="sb-tab" data-tab={t.id} href={t.href} aria-current={t.isCurrent ? 'true' : undefined}>{t.label}</a>
+  ))}
+</nav>
 <div class="sb-head">
   {p ? (
     <>
-      <a class="sb-name" href={u(`${p.id}/`)}>{p.name}</a>
       <span class="sb-sub">{p.expansion}</span>
       <span class="sb-meta">
         <span>v{version(p.id as any)}</span>
-        <a href={u(`${p.id}/`)}>Overview</a>
+        <a href={u(`${p.id}/`)}>About {p.name}</a>
         <a href={`https://github.com/${p.repo}`}>Source</a>
       </span>
     </>
   ) : (
-    <>
-      <span class="sb-name">SUITE DOCS</span>
-      <span class="sb-sub">How PRISM, LENS and LUMEN fit together</span>
-    </>
+    <span class="sb-sub">How PRISM, LENS and LUMEN fit together</span>
   )}
 </div>
 <Default />

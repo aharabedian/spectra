@@ -1,10 +1,9 @@
 ---
-// Starlight's header, replaced by the site's own bar with Starlight's search in it.
+// Starlight's header, replaced by the site's own bar with Starlight's search in it. Every docs page
+// highlights Docs: the project links lead to the landing pages, and the sidebar switches between docs.
 import Search from '@astrojs/starlight/components/Search.astro';
 import SiteNav from '../SiteNav.astro';
-import { projectOfDoc } from '../../lib/site';
-const p = projectOfDoc(Astro.locals.starlightRoute.id);
 ---
-<SiteNav active={(p?.id ?? 'guide') as any}>
+<SiteNav active="guide">
   <div class="snav-search"><Search /></div>
 </SiteNav>
