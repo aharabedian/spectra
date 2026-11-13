@@ -23,17 +23,18 @@
 
 /* Top bar */
 .snav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; height: 100%; font-family: var(--sp-sans); }
-.snav-brand { display: flex; align-items: center; gap: 10px; color: var(--sp-text); text-decoration: none; padding: 8px 0; }
+.snav-brand { display: flex; align-items: center; gap: 10px; color: var(--sp-text); text-decoration: none; padding: 6px 12px 6px 8px; margin-left: -8px; border-radius: 6px; }
+.snav-brand[aria-current='page'] { background: var(--sp-surface-2); }
 .snav-brand:hover { color: var(--sp-text); text-decoration: none; }
 .snav-word { font-family: var(--sp-mono); font-weight: 600; font-size: 15px; letter-spacing: 0.16em; }
 .snav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 2px; margin-left: auto; }
 .snav .navlink { display: inline-flex; align-items: center; gap: 8px; color: #AEB8C2; font-size: 14px; font-weight: 500; padding: 10px 12px; border-radius: 6px; text-decoration: none; }
 .snav .navlink:hover, .snav .navlink[aria-current='page'] { color: var(--sp-text); background: var(--sp-surface-2); text-decoration: none; }
 .navdot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-.snav-sep { color: var(--sp-faint); }
 @media (max-width: 50rem) {
   .snav { gap: 8px 12px; }
-  .snav-brand, .snav-gh { display: none; } /* SPECTRA in the links goes home too */
+  .snav-word, .snav-gh { display: none; } /* the logo alone is the suite's link */
+  .snav-brand { padding: 6px; margin-left: -6px; }
   .snav .navlink { padding: 8px 7px; font-size: 13px; gap: 6px; }
   .snav-links { margin-left: 0; flex-wrap: nowrap; }
   .snav .navlink[aria-label] { display: none; }

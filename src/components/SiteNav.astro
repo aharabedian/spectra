@@ -1,30 +1,29 @@
 ---
-// The top bar: which part of Spectra you're in, the suite or one project. Links keep you in the same
-// section: from a landing page they go to the other landing pages, from the docs to the other docs (the
-// same page when that project has one; `docsHrefs`, from route-middleware.ts). Used by the landing pages
+// The top bar: which part of Spectra you're in. The logo is the suite's link, then one per project.
+// Links keep you in the same section: from a landing page they go to the other landing pages (the logo
+// to the home page), from the docs to the other docs (the logo to the suite guide; a project's link to
+// the same page when it has one, `docsHrefs` from route-middleware.ts). Used by the landing pages
 // and, through starlight/Header.astro, by every docs page (with Starlight's search in the slot).
 import { u, projects, type Area, type Section } from '../lib/site';
+import Mark from '../assets/mark.svg'; // the Spectra logo (public/favicon.svg is its copy for the tab)
 interface Props { current: Area; section: Section; docsHrefs?: Record<string, string>; }
 const { current, section, docsHrefs = {} } = Astro.props;
 const docs = section === 'docs';
-const items = [
-  { id: 'suite', label: 'SPECTRA', accent: undefined, href: docs ? u('guide/') : u() },
-  ...projects.map((p) => ({
-    id: p.id, label: p.name, accent: p.accent,
-    href: docs ? docsHrefs[p.id] ?? u(`${p.id}/docs/`) : u(`${p.id}/`),
-  })),
-];
+const items = projects.map((p) => ({
+  id: p.id, label: p.name, accent: p.accent,
+  href: docs ? docsHrefs[p.id] ?? u(`${p.id}/docs/`) : u(`${p.id}/`),
+}));
 ---
 <div class="snav">
-  <a class="snav-brand" href={u()} aria-label="Spectra home">
-    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M1 15.5 H9" stroke="#E6EAEE" stroke-width="1.8" stroke-linecap="round"/><path d="M13 5 L21 23 H5 Z" fill="none" stroke="#E6EAEE" stroke-width="1.8" stroke-linejoin="round"/><path d="M16.5 12.5 L29 8" stroke="#FF9F43" stroke-width="1.8" stroke-linecap="round"/><path d="M17.2 15 L29 15" stroke="#5EB4FF" stroke-width="1.8" stroke-linecap="round"/><path d="M17.8 17.5 L29 22" stroke="#4FD17A" stroke-width="1.8" stroke-linecap="round"/></svg>
-    <span class="snav-word">PRISM <span class="snav-sep">·</span> LENS <span class="snav-sep">·</span> LUMEN</span>
+  <a class="snav-brand" aria-label="SPECTRA" href={docs ? u('guide/') : u()} aria-current={current === 'suite' ? 'page' : undefined}>
+    <Mark width={30} height={30} aria-hidden="true" />
+    <span class="snav-word">SPECTRA</span>
   </a>
   <slot />
   <nav class="snav-links" aria-label="Spectra">
     {items.map((i) => (
       <a class="navlink" href={i.href} aria-current={i.id === current ? 'page' : undefined}>
-        {i.accent && <span class="navdot" style={`background: ${i.accent}`}></span>}{i.label}
+        <span class="navdot" style={`background: ${i.accent}`}></span>{i.label}
       </a>
     ))}
     <a class="navlink" href="https://github.com/aharabedian" aria-label="aharabedian on GitHub">
