@@ -25,8 +25,10 @@ body.site { margin: 0; background: var(--sp-bg); color: var(--sp-text); font-fam
 .card-link:hover { text-decoration: none !important; }
 .card-link:hover .card { border-color: #3A444F !important; }
 
-.sub a { color: #AEB8C2 !important; font-size: 14px; font-weight: 500; padding: 12px 2px; display: inline-block; }
-.sub a:hover { color: var(--sp-text) !important; text-decoration: none !important; }
+.site-subnav { border-bottom: 1px solid var(--sp-line-soft); background: var(--sp-bg-2); }
+.site-subnav-in { max-width: 1240px; margin: 0 auto; padding: 0 24px; height: 46px; }
+.site .subnav .subnav-link { color: #AEB8C2; }
+.site .subnav .subnav-link:hover, .site .subnav .subnav-link[aria-current='page'] { color: var(--sp-text); text-decoration: none; }
 
 pre.code { margin: 0; background: var(--sp-code-bg); border: 1px solid var(--sp-line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font: 13.5px/1.7 var(--sp-mono); color: #D5DCE3; white-space: pre; }
 .c { color: #7D8894; } .s { color: #9BE59B; } .n { color: #FFB86B; } .fn { color: #C2E3FF; }

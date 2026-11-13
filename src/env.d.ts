@@ -1,6 +1,6 @@
 declare namespace App {
   interface Locals {
-    /** The docs switcher's tabs, set by src/route-middleware.ts. */
-    spectraDocsTabs?: import('./route-middleware').DocsTab[];
+    /** Where the top bar's project links go from a docs page, by project id. Set by src/route-middleware.ts. */
+    spectraDocsHrefs?: Record<string, string>;
   }
 }

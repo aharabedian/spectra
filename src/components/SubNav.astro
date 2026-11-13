@@ -1,0 +1,28 @@
+---
+// The bar under the top bar, on every page: the sections of the suite or project you're in
+// (Overview, Docs, Changelog, Source), with the current one underlined in its color.
+import { u, project, version, type Area, type Section } from '../lib/site';
+interface Props { current: Area; section: Section; }
+const { current, section } = Astro.props;
+const p = current === 'suite' ? undefined : project(current);
+const name = p?.name ?? 'SPECTRA';
+const links = p
+  ? [
+      { id: 'overview', label: 'Overview', href: u(`${p.id}/`) },
+      { id: 'docs', label: 'Docs', href: u(`${p.id}/docs/`) },
+      { id: 'changelog', label: 'Changelog', href: `https://github.com/${p.repo}/blob/main/CHANGELOG.md` },
+      { id: 'source', label: 'Source', href: `https://github.com/${p.repo}` },
+    ]
+  : [
+      { id: 'overview', label: 'Overview', href: u() },
+      { id: 'docs', label: 'Docs', href: u('guide/') },
+      { id: 'source', label: 'Source', href: 'https://github.com/aharabedian/spectra' },
+    ];
+---
+<nav class="subnav" aria-label={name} style={`--area: ${p?.accent ?? 'var(--sp-text)'}`}>
+  <span class="subnav-name">{name}</span>
+  {links.map((l) => (
+    <a class="subnav-link" href={l.href} aria-current={l.id === section ? 'page' : undefined}>{l.label}</a>
+  ))}
+  <span class="subnav-meta">{p ? `v${version(p.id as any)} · MIT` : 'MIT'}</span>
+</nav>

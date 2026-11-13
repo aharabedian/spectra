@@ -19,7 +19,9 @@
   --sl-color-accent-low: #10202F;
   --sl-color-accent: #8CCBFF;
   --sl-color-accent-high: #C2E3FF;
-  --sl-nav-height: 4rem;
+  --sp-top-h: 3.5rem;
+  --sp-sub-h: 2.875rem;
+  --sl-nav-height: calc(var(--sp-top-h) + var(--sp-sub-h));
   --sl-content-width: 48rem;
   --sl-text-h1: 2.75rem;
   --sl-text-h2: 1.75rem;
@@ -29,32 +31,25 @@
 :root[data-project='lens']  { --sl-color-accent-low: #0E2236; --sl-color-accent: #5EB4FF; --sl-color-accent-high: #A9D6FF; }
 :root[data-project='lumen'] { --sl-color-accent-low: #0D2716; --sl-color-accent: #4FD17A; --sl-color-accent-high: #9BEBB5; }
 
-.header { border-bottom-color: var(--sp-line-soft); }
+@media (min-width: 50rem) { :root { --sp-top-h: 4rem; } }
+
+/* The header: the site's top bar over the project's sections, each a full-width row */
+.header, [data-has-sidebar] .header { padding: 0; border-bottom-color: var(--sp-line-soft); }
+.sl-bars { height: 100%; display: flex; flex-direction: column; }
+.sl-bar-top { height: var(--sp-top-h); padding: 0 var(--sl-nav-pad-x); border-bottom: 1px solid var(--sp-line-soft); }
+.sl-bar-sub { flex: 1; padding: 0 var(--sl-nav-pad-x); background: var(--sp-bg-2); }
 .snav { flex-wrap: nowrap; }
 .snav-search { flex: 1; display: flex; justify-content: center; min-width: 0; }
+.sl-menu-button { top: calc((var(--sp-top-h) - var(--sl-menu-button-size)) / 2); }
 @media (max-width: 50rem) {
-  .snav-links { display: none; }
-  .snav-search { justify-content: flex-end; }
+  [data-has-sidebar] .sl-bar-top { padding-inline-end: calc(var(--sl-nav-pad-x) + var(--sl-menu-button-size) + 0.5rem); }
+  .snav-search { flex: none; order: 3; }
+  .snav-search { margin-left: auto; }
 }
 @media (min-width: 50rem) and (max-width: 72rem) { .snav-gh { display: none; } }
 
-/* Docs switcher: the suite guide and each project's docs, one tab each in its own color */
-.sb-tabs { display: grid; grid-template-columns: 0.8fr 1fr 0.9fr 1.05fr; gap: 1px; padding: 3px; margin-bottom: 14px; background: var(--sp-bg-2); border: 1px solid var(--sp-line); border-radius: 9px; }
-.sb-tab { --tab: var(--sp-text); display: flex; align-items: center; justify-content: center; gap: 5px; padding: 8px 0; border-radius: 6px; font-family: var(--sp-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; color: var(--sp-muted); text-decoration: none; }
-.sb-tab[data-tab='prism'] { --tab: var(--sp-prism); }
-.sb-tab[data-tab='lens'] { --tab: var(--sp-lens); }
-.sb-tab[data-tab='lumen'] { --tab: var(--sp-lumen); }
-.sb-tab[data-tab]:not([data-tab='suite'])::before { content: ''; width: 6px; height: 6px; border-radius: 2px; background: var(--tab); opacity: 0.55; }
-.sb-tab:hover { color: var(--sp-text); background: var(--sp-surface-2); }
-.sb-tab[aria-current] { color: var(--tab); background: var(--sp-surface-2); box-shadow: inset 0 -2px 0 var(--tab); }
-.sb-tab[aria-current]::before { opacity: 1; }
-
-/* Sidebar head: what the current docs are */
-.sb-head { display: flex; flex-direction: column; gap: 4px; padding: 0 0 14px; margin-bottom: 8px; border-bottom: 1px solid var(--sp-line-soft); }
-.sb-sub { font-size: 12.5px; color: var(--sp-muted); line-height: 1.4; }
-.sb-meta { display: flex; gap: 14px; font-family: var(--sp-mono); font-size: 12px; color: var(--sp-muted); padding-top: 6px; }
-.sb-meta a { color: var(--sp-text-3); text-decoration: none; }
-.sb-meta a:hover { color: var(--sp-text); }
+/* "On this page", quiet like the sidebar's group labels */
+#starlight__on-this-page { font-family: var(--sp-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
 
 /* Sidebar links: quiet, with the current page marked by a bar in the project's color */
 .sidebar-content .large { font-size: 14.5px; font-weight: 500; color: var(--sp-text-2); }

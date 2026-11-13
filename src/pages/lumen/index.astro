@@ -1,19 +1,8 @@
 ---
 import Site from '../../layouts/Site.astro';
-import { u, version } from '../../lib/site';
+import { u } from '../../lib/site';
 ---
 <Site title={'LUMEN: Load, Usage & Management of Energy Networks'} description={'Power monitoring for GregTech: New Horizons: every LSC on one screen, switches and alerts.'} active="lumen">
-<nav class="sub" aria-label="LUMEN" style="border-bottom: 1px solid #1C2229; background: #0D1014">
-<div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px">
-<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; color: #4FD17A; padding: 12px 0">LUMEN</span>
-<a href={u("lumen/")} style="color: #E6EAEE; box-shadow: inset 0 -2px 0 #4FD17A">Overview</a>
-<a href={u("lumen/docs/")}>Docs</a>
-<a href="https://github.com/aharabedian/lumen/blob/main/CHANGELOG.md">Changelog</a>
-<a href="https://github.com/aharabedian/lumen">Source</a>
-<span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">v{version("lumen")} · MIT</span>
-</div>
-</nav>
-
 <main>
 
 <section aria-labelledby="hero" style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">

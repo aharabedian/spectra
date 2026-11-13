@@ -82,8 +82,9 @@ PRISM_REF=v1.1.0 npm run fetch-docs                      # one project from a gi
 | `src/pages/` | Home (`index.astro`) and the landing pages (`prism/`, `lens/`, `lumen/`) |
 | `src/content/docs/guide/` | *Putting the suite together*, the one doc that lives here |
 | `src/content/docs/<id>/` | **Generated** by `fetch-docs`; git-ignored. Edit the docs in their own repo |
-| `src/components/starlight/` | Starlight overrides: the site's header, the sidebar with its docs switcher, the page title (project label on phones), dark-only theme |
-| `src/route-middleware.ts` | Gives each project's docs their own sidebar and previous/next links, and the switcher's tabs (same page in another project when it has one) |
+| `src/components/` | `SiteNav` (top bar: the suite or a project, staying in Overview or Docs) and `SubNav` (that area's Overview, Docs, Changelog, Source), on every page |
+| `src/components/starlight/` | Starlight overrides: the header (both bars), the page title's crumb, dark-only theme |
+| `src/route-middleware.ts` | Gives each project's docs their own sidebar and previous/next links, and where the top bar's links go from a docs page (the same page in another project when it has one) |
 | `src/styles/` | `tokens.css` (palette, shared bits), `site.css` (landing pages), `starlight.css` (docs) |
 | `scripts/` | `fetch-docs.mjs`, `check-facts.mjs`, `check-links.mjs` |
 | `extras/project-repo/` | The workflow each project repo needs (below) |
