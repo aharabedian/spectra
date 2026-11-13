@@ -1,0 +1,260 @@
+---
+import Site from '../layouts/Site.astro';
+import { u, version } from '../lib/site';
+---
+<Site title={'Spectra: PRISM, LENS and LUMEN for GregTech: New Horizons'} description={'OpenComputers programs that route your ore, watch your power and show the whole base on one screen.'} active="home">
+<main>
+
+<section aria-labelledby="hero-title" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #AEB8C2">Spectra · OpenComputers software for GregTech: New Horizons</p>
+<h1 id="hero-title" style="margin: 0; font-size: 60px; line-height: 1.04; font-weight: 700; letter-spacing: -0.025em">Route the items.<br><span style="color: #4FD17A">Watch the power.</span><br><span style="color: #5EB4FF">See the whole base.</span></h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #B7C0C9; max-width: 560px">Three small Lua projects for OpenComputers. <strong style="color: #FF9F43; font-weight: 600">PRISM</strong> routes ore through your AE2 subnet, <strong style="color: #4FD17A; font-weight: 600">LUMEN</strong> keeps an eye on your Lapotronic Supercapacitors, and <strong style="color: #5EB4FF; font-weight: 600">LENS</strong> gathers everything into one dashboard and an AR glasses HUD. Each runs on its own; together they're Spectra.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a class="btn" href={u("guide/")} style="background: #E6EAEE; color: #0B0E11">Set up the suite <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn" href="#projects" style="background: #161B21; color: #E6EAEE; border: 1px solid #2A323B">Meet the three</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">
+<span>Lua 5.3</span><span style="color: #3A444F">/</span><span>MIT licensed</span><span style="color: #3A444F">/</span><span>Tested without Minecraft</span>
+</div>
+</div>
+<figure style="flex: 1 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="background: #0F1317; border: 1px solid #232A32; border-radius: 12px; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1C2229; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">
+<span>lens-hub — tier 3 screen, 160 × 50</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; color: #5EB4FF"><span style="width: 7px; height: 7px; border-radius: 50%; background: #5EB4FF"></span>LIVE</span>
+</div>
+<img src={u("shots/lens/dashboard.png")} alt="The LENS hub dashboard: one PRISM node in BAD health, an alert for a machine with no power, and panels for ore backlog and machines running" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800">
+</div>
+<figcaption style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+<img src={u("shots/lens/hud-alerts.png")} alt="The LENS AR glasses HUD over a Minecraft dirt wall: an ore backlog bar and two alerts" style="width: 260px; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #232A32">
+<span style="flex: 1 1 200px; font-size: 14px; line-height: 1.55; color: #9AA5B1">The same alerts follow you around the base in OC Glasses. Every screen on this site is a real render from the projects' test suites.</span>
+</figcaption>
+</figure>
+</section>
+
+<section id="projects" aria-labelledby="projects-title" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 720px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Three programs, one job each</p>
+<h2 id="projects-title" style="margin: 0; font-size: 40px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Split it. Gather it. Measure it.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #B7C0C9">Named after the optics they behave like: a prism fans one beam into many, a lens focuses many into one, and a lumen is how you measure the light.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+
+<a class="card-link" href={u("prism/")}>
+<div class="card" style="height: 100%; box-sizing: border-box; background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+<svg viewBox="0 0 280 96" width="100%" height="96" aria-hidden="true" style="display: block"><path d="M0 50 H108" stroke="#E6EAEE" stroke-width="2"/><path d="M128 14 L156 82 H100 Z" fill="#FF9F43" fill-opacity="0.08" stroke="#FF9F43" stroke-width="2" stroke-linejoin="round"/><path d="M140 46 L280 10" stroke="#FF9F43" stroke-width="2"/><path d="M141 49 L280 32" stroke="#FFB86B" stroke-width="2"/><path d="M142 52 L280 54" stroke="#FF9F43" stroke-width="2" stroke-opacity="0.8"/><path d="M143 55 L280 76" stroke="#FFB86B" stroke-width="2" stroke-opacity="0.7"/><path d="M144 58 L280 94" stroke="#FF9F43" stroke-width="2" stroke-opacity="0.55"/></svg>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 26px; letter-spacing: 0.06em; color: #FF9F43">PRISM</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">v{version("prism")}</span>
+</div>
+<p style="margin: 0; font-size: 13px; font-family: 'IBM Plex Mono', monospace; color: #9AA5B1; line-height: 1.5">Programmable Routing &amp; Item Sorting for ME</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C9D1D9">Scans an AE2 subnet, decides where each item goes from pattern rules, and configures export buses, stocking buses and interfaces to match. One stream of ore in, every machine fed.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #B7C0C9">
+<li>— Lua-pattern rules with a live preview</li>
+<li>— Fallbacks when a machine falls behind</li>
+<li>— Batch feeders and stall detection</li>
+</ul>
+<span style="margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: #FF9F43">Explore PRISM <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</div>
+</a>
+
+<a class="card-link" href={u("lens/")}>
+<div class="card" style="height: 100%; box-sizing: border-box; background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+<svg viewBox="0 0 280 96" width="100%" height="96" aria-hidden="true" style="display: block"><path d="M0 8 L132 46" stroke="#FF9F43" stroke-width="2"/><path d="M0 48 L132 48" stroke="#4FD17A" stroke-width="2"/><path d="M0 88 L132 50" stroke="#C9D1D9" stroke-width="2" stroke-dasharray="4 5"/><path d="M140 6 C 158 30, 158 66, 140 90 C 122 66, 122 30, 140 6 Z" fill="#5EB4FF" fill-opacity="0.1" stroke="#5EB4FF" stroke-width="2"/><path d="M148 48 L250 48" stroke="#5EB4FF" stroke-width="3"/><circle cx="256" cy="48" r="7" fill="#5EB4FF"/></svg>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 26px; letter-spacing: 0.06em; color: #5EB4FF">LENS</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">v{version("lens")}</span>
+</div>
+<p style="margin: 0; font-size: 13px; font-family: 'IBM Plex Mono', monospace; color: #9AA5B1; line-height: 1.5">Live Engineering &amp; Network Status</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C9D1D9">The opposite of PRISM: every system pushes its health, metrics and alerts, and the hub shows the base at a glance, on one screen and in your glasses. It watches; it never controls.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #B7C0C9">
+<li>— Prometheus-style queries and rules</li>
+<li>— AR glasses HUD, one per player</li>
+<li>— Notices when an agent goes quiet</li>
+</ul>
+<span style="margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: #5EB4FF">Explore LENS <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</div>
+</a>
+
+<a class="card-link" href={u("lumen/")}>
+<div class="card" style="height: 100%; box-sizing: border-box; background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+<svg viewBox="0 0 280 96" width="100%" height="96" aria-hidden="true" style="display: block"><rect x="1" y="20" width="278" height="40" rx="4" fill="#1C2229"/><rect x="1" y="20" width="204" height="40" rx="4" fill="#4FD17A"/><path d="M84 12 V68" stroke="#FFD24D" stroke-width="2" stroke-dasharray="3 4"/><path d="M251 12 V68" stroke="#FFD24D" stroke-width="2" stroke-dasharray="3 4"/><text x="84" y="88" fill="#9AA5B1" font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="middle">on 30%</text><text x="251" y="88" fill="#9AA5B1" font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="middle">off 90%</text></svg>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 26px; letter-spacing: 0.06em; color: #4FD17A">LUMEN</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">v{version("lumen")}</span>
+</div>
+<p style="margin: 0; font-size: 13px; font-family: 'IBM Plex Mono', monospace; color: #9AA5B1; line-height: 1.5">Load, Usage &amp; Management of Energy Networks</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C9D1D9">Every LSC a computer reaches on one screen: fill, flows, time to full or empty and the last 24 hours. Switches generators on and off with the fill, and raises alerts that don't cry wolf.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #B7C0C9">
+<li>— History over 80 min, 8 h and 24 h</li>
+<li>— Generator switches with hysteresis</li>
+<li>— Generators and IC2 reactors</li>
+</ul>
+<span style="margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: #4FD17A">Explore LUMEN <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</div>
+</a>
+
+</div>
+</div>
+</section>
+
+<section aria-labelledby="fit-title" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end">
+<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">How they fit</p>
+<h2 id="fit-title" style="margin: 0; font-size: 40px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Agents push. The hub listens.</h2>
+</div>
+<p style="flex: 1 1 400px; margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">PRISM and LUMEN each do their job on their own computer, with their own screens. Turn on LENS reporting and they broadcast a snapshot of their state over <code class="i">lens/1</code> on a port of its own. If the hub is down, nothing else notices.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; background: #0F1317; border: 1px solid #232A32; border-radius: 14px; padding: 32px">
+
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 14px; justify-content: center">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9AA5B1">Agents</p>
+<div style="background: #12161B; border: 1px solid #3A2A18; border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #FF9F43">PRISM router</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">prism-ore</span></div>
+<span style="font-size: 14px; color: #B7C0C9; line-height: 1.5">Backlog per process, machine states, stalls</span>
+<div style="display: flex; align-items: center; gap: 8px; padding-top: 6px; border-top: 1px dashed #2A323B; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FF9F43"></span>control screen on port 4242</div>
+</div>
+<div style="background: #12161B; border: 1px solid #1B3A26; border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #4FD17A">LUMEN</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">power-main</span></div>
+<span style="font-size: 14px; color: #B7C0C9; line-height: 1.5">Stored EU, flows, drain time, switches</span>
+</div>
+<div style="border: 1px dashed #2A323B; border-radius: 10px; padding: 14px 18px; font-size: 14px; color: #9AA5B1">Anything else that speaks <code class="i">lens/1</code></div>
+</div>
+
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px 16px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #E6EAEE">lens/1 snapshots</span>
+<div style="width: 100%; max-width: 220px; display: flex; align-items: center"><div style="flex: 1; height: 2px; background: repeating-linear-gradient(90deg, #5EB4FF 0 8px, transparent 8px 14px)"></div><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 7 L2 12 Z" fill="#5EB4FF"/></svg></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1; text-align: center; line-height: 1.6">broadcast on port 4243<br>own token · ≤ 7 KB a packet<br>wireless, wired or linked card</span>
+</div>
+
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px; justify-content: center">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9AA5B1">Hub</p>
+<div style="background: #101A24; border: 1px solid #22415E; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 18px; color: #5EB4FF">LENS hub</span>
+<span style="font-size: 14px; color: #B7C0C9; line-height: 1.55">Collects every node, runs your queries and rules, raises an alert when a node goes quiet.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 5px 9px; border-radius: 5px; background: #16212C; color: #C2E3FF">Dashboard</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 5px 9px; border-radius: 5px; background: #16212C; color: #C2E3FF">AR glasses HUD</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 5px 9px; border-radius: 5px; background: #16212C; color: #C2E3FF">Alert log</span>
+</div>
+</div>
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #9AA5B1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>No commands flow back to agents.</p>
+</div>
+
+</div>
+<p style="margin: 0; font-size: 15px; color: #9AA5B1">The full wiring, ports and config for all three: <a href={u("guide/")}>Putting the suite together →</a></p>
+</div>
+</section>
+
+<section aria-labelledby="principles-title" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 720px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Built the same way</p>
+<h2 id="principles-title" style="margin: 0; font-size: 40px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Learn one, and you know the other two.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: #1C2229; border: 1px solid #1C2229; border-radius: 12px; overflow: hidden">
+<div style="background: #0D1014; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">01</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">One-command install</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9"><code class="i">prism-update</code>, <code class="i">lens-update</code>, <code class="i">lumen-update</code>: latest release by default, a branch, a tag or a fork if you like. Your config is never overwritten.</p>
+</div>
+<div style="background: #0D1014; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">02</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Guided setup</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Each <code class="i">-setup</code> program finds the components the computer can reach and asks what they're for. Run it again any time; Enter keeps what's there.</p>
+</div>
+<div style="background: #0D1014; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">03</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Touchscreen first</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Designed for a tier 3 screen at 160 × 50, and still useful on tier 2. Tap to route an item, acknowledge an alert or flip a generator to AUTO.</p>
+</div>
+<div style="background: #0D1014; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">04</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Standalone by design</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Reporting to LENS is optional and protected: if it fails, routing and power monitoring carry on as if nothing happened.</p>
+</div>
+<div style="background: #0D1014; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">05</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Tested without Minecraft</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Every project runs against a mocked OpenComputers, AE2 and GregTech world. <code class="i">make check</code> lints and tests; <code class="i">make screens</code> renders the UI to PNG.</p>
+</div>
+<div style="background: #0D1014; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA5B1">06</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Honest about the game</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Each architecture doc keeps a table of which API assumptions are verified in game, reported working, or still unverified.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="install-title" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Install</p>
+<h2 id="install-title" style="margin: 0; font-size: 40px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Two lines on each computer.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">You need an Internet Card to install and update; take it out afterwards if you like. No card? Copy <code class="i">src/</code> and <code class="i">lib/</code> across by floppy or pastebin instead.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9AA5B1">Computers must run the Lua 5.3 architecture: shift-right-click the CPU in hand to switch.</p>
+</div>
+<div class="itabs" style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 0; background: #0F1317; border: 1px solid #232A32; border-radius: 12px; overflow: hidden">
+<div role="tablist" aria-label="Choose a program" style="display: flex; flex-wrap: wrap; border-bottom: 1px solid #232A32">
+<button type="button" role="tab" class="itab" id="tab-prism" aria-controls="panel-prism" aria-selected="true" tabindex="0" style="--tab: #FF9F43">PRISM</button>
+<button type="button" role="tab" class="itab" id="tab-lens" aria-controls="panel-lens" aria-selected="false" tabindex="-1" style="--tab: #5EB4FF">LENS</button>
+<button type="button" role="tab" class="itab" id="tab-lumen" aria-controls="panel-lumen" aria-selected="false" tabindex="-1" style="--tab: #4FD17A">LUMEN</button>
+</div>
+<div role="tabpanel" id="panel-prism" aria-labelledby="tab-prism" style="padding: 22px; display: flex; flex-direction: column; gap: 16px">
+<pre class="code" style="border: none; padding: 0; background: transparent"><span class="c"># on the computer, with an Internet Card</span>
+<span class="p">$</span> wget -f https://raw.githubusercontent.com/aharabedian/prism/main/src/prism-update.lua /home/prism-update.lua
+<span class="p">$</span> /home/prism-update
+<span class="p">$</span> prism-setup
+<span class="p">$</span> prism            # or prism-control on the screen</pre>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #9AA5B1; border-top: 1px solid #1C2229; padding-top: 16px">Installs prism, prism-control, prism-setup, prism-discover and prism-update. Run it on the router and on the control screen; prism-setup asks which one it is.</p>
+</div>
+<div role="tabpanel" id="panel-lens" aria-labelledby="tab-lens" style="padding: 22px; display: flex; flex-direction: column; gap: 16px" hidden>
+<pre class="code" style="border: none; padding: 0; background: transparent"><span class="c"># on the computer, with an Internet Card</span>
+<span class="p">$</span> wget -f https://raw.githubusercontent.com/aharabedian/lens/main/src/lens-update.lua /home/lens-update.lua
+<span class="p">$</span> /home/lens-update
+<span class="p">$</span> lens-setup
+<span class="p">$</span> lens-hub</pre>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #9AA5B1; border-top: 1px solid #1C2229; padding-top: 16px">Installs lens-hub, lens-setup, lens-discover and lens-update on the hub computer. Start your agents first so lens-setup can find them.</p>
+</div>
+<div role="tabpanel" id="panel-lumen" aria-labelledby="tab-lumen" style="padding: 22px; display: flex; flex-direction: column; gap: 16px" hidden>
+<pre class="code" style="border: none; padding: 0; background: transparent"><span class="c"># on the computer, with an Internet Card</span>
+<span class="p">$</span> wget -f https://raw.githubusercontent.com/aharabedian/lumen/main/src/lumen-update.lua /home/lumen-update.lua
+<span class="p">$</span> /home/lumen-update
+<span class="p">$</span> lumen-setup
+<span class="p">$</span> lumen</pre>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #9AA5B1; border-top: 1px solid #1C2229; padding-top: 16px">Installs lumen, lumen-setup, lumen-discover and lumen-update. One computer shows every LSC it can reach.</p>
+</div>
+</div>
+<script>
+  // Install tabs: click or arrow keys switch the program shown.
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('.itabs [role=tab]')];
+  const select = (tab: HTMLButtonElement) => {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')!)!.hidden = !on;
+    }
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      const next = tabs[(i + d + tabs.length) % tabs.length];
+      select(next);
+      next.focus();
+    });
+  });
+</script>
+</div>
+</section>
+
+</main>
+</Site>

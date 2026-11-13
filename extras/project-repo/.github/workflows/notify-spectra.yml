@@ -1,0 +1,24 @@
+# Tell the Spectra site (aharabedian/spectra) to rebuild when this project publishes a release.
+# The site builds docs from each project's latest release, so a release is what changes it.
+#
+# Needs the SPECTRA_DISPATCH_TOKEN secret: a fine-grained personal access token with access to
+# aharabedian/spectra only, and "Contents: Read and write" permission (what repository_dispatch requires).
+name: Update Spectra site
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask Spectra to rebuild
+        env:
+          GH_TOKEN: ${{ secrets.SPECTRA_DISPATCH_TOKEN }}
+        run: |
+          gh api repos/aharabedian/spectra/dispatches \
+            -f event_type=docs-updated \
+            -f "client_payload[repo]=${{ github.repository }}" \
+            -f "client_payload[ref]=${{ github.ref_name }}"

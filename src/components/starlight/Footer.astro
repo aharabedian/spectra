@@ -1,0 +1,14 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { projectOfDoc, version } from '../../lib/site';
+const p = projectOfDoc(Astro.locals.starlightRoute.id);
+---
+<Default />
+<p class="spectra-doc-footer">
+  {p ? <>Built from <a href={`https://github.com/${p.repo}`}>{p.repo}</a> at {version(p.id as any)}. </> : null}
+  MIT licensed · not affiliated with GTNH, OpenComputers or AE2
+</p>
+<style>
+  .spectra-doc-footer { margin-top: 2rem; font-size: 0.8125rem; color: var(--sl-color-gray-3); }
+  .spectra-doc-footer a { color: var(--sl-color-gray-2); }
+</style>

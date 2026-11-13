@@ -1,0 +1,10 @@
+---
+// Starlight's header, replaced by the site's own bar with Starlight's search in it.
+import Search from '@astrojs/starlight/components/Search.astro';
+import SiteNav from '../SiteNav.astro';
+import { projectOfDoc } from '../../lib/site';
+const p = projectOfDoc(Astro.locals.starlightRoute.id);
+---
+<SiteNav active={(p?.id ?? 'guide') as any}>
+  <div class="snav-search"><Search /></div>
+</SiteNav>

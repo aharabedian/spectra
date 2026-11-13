@@ -1,0 +1,73 @@
+# Build the site from each project's latest release and publish it to GitHub Pages.
+#
+# Runs when this repo changes, when a project publishes a release (its notify-spectra workflow sends a
+# repository_dispatch), every night as a safety net, and by hand from the Actions tab.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [docs-updated]
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Build every project from this ref instead of its latest release (e.g. main)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Fetch docs from the project repos
+        run: npm run fetch-docs
+        env:
+          SPECTRA_REF: ${{ inputs.ref }}
+      - name: Check the landing pages against the docs
+        run: npm run check-facts
+      - run: npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+      - name: Check internal links
+        run: npm run check-links
+      - name: Say what was built
+        env:
+          FROM_REPO: ${{ github.event.client_payload.repo }}
+          FROM_REF: ${{ github.event.client_payload.ref }}
+        run: |
+          {
+            echo "### Built from"
+            node -e "const d=require('./src/data/projects.json');for(const[k,v]of Object.entries(d))console.log('- **'+k+'** '+v.version+' ('+v.ref+', '+v.sha+')')"
+            if [ -n "$FROM_REPO" ]; then echo "Triggered by $FROM_REPO $FROM_REF"; fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

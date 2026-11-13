@@ -1,0 +1,34 @@
+/* Spectra's palette and the pieces shared by the landing pages and the docs (the top bar, inline code). */
+:root {
+  --sp-bg: #0B0E11;
+  --sp-bg-2: #0D1014;
+  --sp-surface: #12161B;
+  --sp-surface-2: #161B21;
+  --sp-code-bg: #0F1317;
+  --sp-line: #232A32;
+  --sp-line-soft: #1C2229;
+  --sp-text: #E6EAEE;
+  --sp-text-2: #C9D1D9;
+  --sp-text-3: #B7C0C9;
+  --sp-muted: #9AA5B1;
+  --sp-faint: #4E5863;
+  --sp-prism: #FF9F43;
+  --sp-lens: #5EB4FF;
+  --sp-lumen: #4FD17A;
+  --sp-warn: #FFD24D;
+  --sp-bad: #FF5C5C;
+  --sp-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --sp-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* Top bar */
+.snav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; height: 100%; font-family: var(--sp-sans); }
+.snav-brand { display: flex; align-items: center; gap: 10px; color: var(--sp-text); text-decoration: none; padding: 8px 0; }
+.snav-brand:hover { color: var(--sp-text); text-decoration: none; }
+.snav-word { font-family: var(--sp-mono); font-weight: 600; font-size: 15px; letter-spacing: 0.16em; }
+.snav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 2px; margin-left: auto; }
+.snav .navlink { display: inline-flex; align-items: center; gap: 8px; color: #AEB8C2; font-size: 14px; font-weight: 500; padding: 10px 12px; border-radius: 6px; text-decoration: none; }
+.snav .navlink:hover, .snav .navlink[aria-current='page'] { color: var(--sp-text); background: var(--sp-surface-2); text-decoration: none; }
+.navdot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+code.i { font: 0.88em var(--sp-mono); background: var(--sp-surface-2); border: 1px solid var(--sp-line); border-radius: 4px; padding: 1px 6px; color: var(--sp-text); white-space: nowrap; }

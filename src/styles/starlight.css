@@ -1,0 +1,87 @@
+/* Starlight, dressed as Spectra. Colors come from tokens.css; each project's docs take its accent. */
+:root, :root[data-theme='dark'] {
+  --sl-font: var(--sp-sans);
+  --sl-font-mono: var(--sp-mono);
+  --sl-color-white: var(--sp-text);
+  --sl-color-gray-1: var(--sp-text-2);
+  --sl-color-gray-2: var(--sp-text-3);
+  --sl-color-gray-3: var(--sp-muted);
+  --sl-color-gray-4: var(--sp-faint);
+  --sl-color-gray-5: var(--sp-line);
+  --sl-color-gray-6: var(--sp-surface);
+  --sl-color-gray-7: var(--sp-bg-2);
+  --sl-color-black: var(--sp-bg);
+  --sl-color-bg-nav: var(--sp-bg);
+  --sl-color-bg-sidebar: var(--sp-bg);
+  --sl-color-hairline: var(--sp-line-soft);
+  --sl-color-hairline-light: var(--sp-line-soft);
+  --sl-color-hairline-shade: var(--sp-line-soft);
+  --sl-color-accent-low: #10202F;
+  --sl-color-accent: #8CCBFF;
+  --sl-color-accent-high: #C2E3FF;
+  --sl-nav-height: 4rem;
+  --sl-content-width: 48rem;
+  --sl-text-h1: 2.75rem;
+  --sl-text-h2: 1.75rem;
+  --sl-text-h3: 1.1875rem;
+}
+:root[data-project='prism'] { --sl-color-accent-low: #2B1C0C; --sl-color-accent: #FF9F43; --sl-color-accent-high: #FFC58A; }
+:root[data-project='lens']  { --sl-color-accent-low: #0E2236; --sl-color-accent: #5EB4FF; --sl-color-accent-high: #A9D6FF; }
+:root[data-project='lumen'] { --sl-color-accent-low: #0D2716; --sl-color-accent: #4FD17A; --sl-color-accent-high: #9BEBB5; }
+
+.header { border-bottom-color: var(--sp-line-soft); }
+.snav { flex-wrap: nowrap; }
+.snav-search { flex: 1; display: flex; justify-content: center; min-width: 0; }
+@media (max-width: 50rem) {
+  .snav-links { display: none; }
+  .snav-search { justify-content: flex-end; }
+}
+@media (min-width: 50rem) and (max-width: 72rem) { .snav-gh { display: none; } }
+
+/* Sidebar head */
+.sb-head { display: flex; flex-direction: column; gap: 4px; padding: 4px 0 16px; margin-bottom: 8px; border-bottom: 1px solid var(--sp-line-soft); }
+.sb-name { font-family: var(--sp-mono); font-weight: 600; font-size: 15px; letter-spacing: 0.08em; color: var(--sl-color-accent); text-decoration: none; }
+.sb-sub { font-size: 12.5px; color: var(--sp-muted); line-height: 1.4; }
+.sb-meta { display: flex; gap: 14px; font-family: var(--sp-mono); font-size: 12px; color: var(--sp-muted); padding-top: 6px; }
+.sb-meta a { color: var(--sp-text-3); text-decoration: none; }
+.sb-meta a:hover { color: var(--sp-text); }
+:root[data-project='suite'] .sb-name { color: var(--sp-text); }
+
+/* Sidebar links: quiet, with the current page marked by a bar in the project's color */
+.sidebar-content .large { font-size: 14.5px; font-weight: 500; color: var(--sp-text-2); }
+.sidebar-content .top-level > li + li { margin-top: 0.25rem; }
+.sidebar-content a { border-radius: 6px; }
+.sidebar-content a:hover { background: var(--sp-surface-2); color: var(--sp-text); }
+.sidebar-content [aria-current='page'],
+.sidebar-content [aria-current='page']:hover,
+.sidebar-content [aria-current='page']:focus {
+  background: var(--sp-surface-2);
+  color: var(--sp-text);
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--sl-color-accent);
+}
+.sidebar-content [aria-current='page'] .large { color: var(--sp-text); font-weight: 600; }
+.sidebar-content .group-label .large { font-family: var(--sp-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
+
+/* Content */
+.sl-markdown-content { font-size: 16.5px; line-height: 1.72; }
+.sl-markdown-content h1, .sl-markdown-content h2, .sl-markdown-content h3 { letter-spacing: -0.01em; }
+h1#_top { letter-spacing: -0.02em; font-weight: 700; }
+.sl-markdown-content table { font-size: 14.5px; border: 1px solid var(--sp-line); border-radius: 10px; border-collapse: separate; border-spacing: 0; overflow: hidden; display: block; overflow-x: auto; }
+.sl-markdown-content th { background: var(--sp-surface); color: #AEB8C2; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--sp-line); }
+.sl-markdown-content th, .sl-markdown-content td { padding: 10px 14px; border-inline: none; border-top: none; }
+.sl-markdown-content td { border-bottom: 1px solid var(--sp-line-soft); vertical-align: top; }
+.sl-markdown-content tr:last-child td { border-bottom: none; }
+.sl-markdown-content :not(pre) > code { font-size: 0.88em; background: var(--sp-surface-2); border: 1px solid var(--sp-line); border-radius: 4px; padding: 1px 6px; color: var(--sp-text); }
+.sl-markdown-content img { border: 1px solid var(--sp-line); border-radius: 10px; }
+.sl-markdown-content a { text-underline-offset: 3px; }
+
+/* Asides (:::note, or > [!NOTE] in the project docs): boxed, in the site's status colors */
+:root {
+  --sl-color-blue: #5EB4FF;   --sl-color-blue-low: #101A24;   --sl-color-blue-high: #C2E3FF;
+  --sl-color-purple: #4FD17A; --sl-color-purple-low: #0F1D14; --sl-color-purple-high: #9BEBB5;
+  --sl-color-orange: #FFD24D; --sl-color-orange-low: #1D180A; --sl-color-orange-high: #FFE79A;
+  --sl-color-red: #FF5C5C;    --sl-color-red-low: #221012;    --sl-color-red-high: #FFB3B3;
+}
+.starlight-aside { border-radius: 10px; border: 1px solid color-mix(in srgb, var(--sl-color-asides-border) 40%, transparent); padding: 1rem 1.125rem; }
+.starlight-aside__title { font-size: 0.9375rem; }

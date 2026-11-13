@@ -1,0 +1,30 @@
+---
+import { u, projects } from '../lib/site';
+---
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="snav-word">SPECTRA</span>
+        <p>PRISM, LENS and LUMEN: OpenComputers programs for running a GregTech: New Horizons base. By aharabedian.</p>
+      </div>
+      <nav aria-label="Projects">
+        <span class="foot-h">Projects</span>
+        <a href={u('prism/')}>PRISM: item routing</a>
+        <a href={u('lens/')}>LENS: monitoring</a>
+        <a href={u('lumen/')}>LUMEN: power</a>
+      </nav>
+      <nav aria-label="Documentation">
+        <span class="foot-h">Docs</span>
+        <a href={u('guide/')}>Putting the suite together</a>
+        {projects.map((p) => <a href={u(`${p.id}/docs/`)}>{p.name} docs</a>)}
+      </nav>
+      <nav aria-label="Source">
+        <span class="foot-h">Source</span>
+        {projects.map((p) => <a href={`https://github.com/${p.repo}`}>{p.repo}</a>)}
+        <a href="https://github.com/aharabedian/spectra">aharabedian/spectra</a>
+      </nav>
+    </div>
+    <p class="foot-legal">MIT licensed. A fan project, not affiliated with GregTech: New Horizons, OpenComputers or Applied Energistics 2.</p>
+  </div>
+</footer>

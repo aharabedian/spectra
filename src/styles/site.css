@@ -1,0 +1,68 @@
+/* The landing pages. Layout lives inline in the markup (ported from the design canvas); this file holds the
+   page basics and the few classes the pages share. */
+html { background: var(--sp-bg); scroll-behavior: smooth; }
+body.site { margin: 0; background: var(--sp-bg); color: var(--sp-text); font-family: var(--sp-sans); -webkit-font-smoothing: antialiased; }
+.site h1, .site h2, .site h3 { color: var(--sp-text); }
+.site a { color: #8CCBFF; text-decoration: none; }
+.site a:hover { color: #C2E3FF; text-decoration: underline; }
+.site[data-project='prism'] a { color: #FFB86B; } .site[data-project='prism'] a:hover { color: #FFD3A3; }
+.site[data-project='lumen'] a { color: #8FE3AA; } .site[data-project='lumen'] a:hover { color: #C3F2D2; }
+.site img { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--sp-lens); outline-offset: 2px; }
+
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 10; background: var(--sp-text); color: var(--sp-bg) !important; padding: 8px 12px; border-radius: 6px; }
+.skip:focus { left: 8px; }
+
+.site-header { border-bottom: 1px solid var(--sp-line-soft); }
+.site-header-in { max-width: 1240px; margin: 0 auto; padding: 12px 24px; }
+.site .snav-brand, .site .snav-brand:hover { color: var(--sp-text) !important; text-decoration: none !important; }
+.site .snav .navlink { color: #AEB8C2; }
+.site .snav .navlink:hover, .site .snav .navlink[aria-current='page'] { color: var(--sp-text); text-decoration: none; }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; padding: 13px 20px; border-radius: 8px; }
+.site a.btn:hover { text-decoration: none; filter: brightness(1.08); }
+.card-link { color: inherit !important; }
+.card-link:hover { text-decoration: none !important; }
+.card-link:hover .card { border-color: #3A444F !important; }
+
+.sub a { color: #AEB8C2 !important; font-size: 14px; font-weight: 500; padding: 12px 2px; display: inline-block; }
+.sub a:hover { color: var(--sp-text) !important; text-decoration: none !important; }
+
+pre.code { margin: 0; background: var(--sp-code-bg); border: 1px solid var(--sp-line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font: 13.5px/1.7 var(--sp-mono); color: #D5DCE3; white-space: pre; }
+.c { color: #7D8894; } .s { color: #9BE59B; } .n { color: #FFB86B; } .fn { color: #C2E3FF; }
+.p { color: #5EB4FF; }
+.site[data-project='prism'] .p { color: var(--sp-prism); }
+.site[data-project='lumen'] .p { color: var(--sp-lumen); }
+
+table.t { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+table.t th { text-align: left; font-weight: 600; color: #AEB8C2; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 14px; background: var(--sp-surface); border-bottom: 1px solid var(--sp-line); }
+table.t td { padding: 10px 14px; border-bottom: 1px solid var(--sp-line-soft); color: var(--sp-text-2); vertical-align: top; }
+table.t tr:last-child td { border-bottom: none; }
+.site[data-project='lumen'] table.t { font-size: 15px; }
+.site[data-project='lumen'] table.t td { padding: 14px 18px; line-height: 1.55; }
+
+/* Install tabs on the home page */
+.itab { appearance: none; border: none; cursor: pointer; font: 600 14px var(--sp-mono); letter-spacing: 0.06em; padding: 14px 22px; min-height: 48px; background: transparent; color: var(--sp-muted); box-shadow: inset 0 -2px 0 transparent; }
+.itab[aria-selected='true'] { background: var(--sp-surface); color: var(--tab); box-shadow: inset 0 -2px 0 var(--tab); }
+.itab:hover { color: var(--sp-text); }
+
+/* Footer */
+.foot { border-top: 1px solid var(--sp-line-soft); background: var(--sp-bg-2); }
+.foot-in { max-width: 1240px; margin: 0 auto; padding: 56px 24px 40px; display: flex; flex-direction: column; gap: 40px; }
+.foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+.foot-brand p { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--sp-muted); }
+.foot nav { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.foot-h { font-family: var(--sp-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
+.site .foot a { color: #AEB8C2; }
+.site .foot a:hover { color: var(--sp-text); }
+.foot-legal { margin: 0; padding-top: 24px; border-top: 1px solid var(--sp-line-soft); font-size: 13px; line-height: 1.6; color: var(--sp-muted); }
+
+@media (max-width: 640px) {
+  .site h1 { font-size: 40px !important; }
+  .site h2 { font-size: 30px !important; }
+  /* One scrolling row for the top bar and the project bar instead of wrapping; GitHub is in the footer. */
+  .site .snav-links { margin-left: 0; width: 100%; flex-wrap: nowrap; overflow-x: auto; }
+  .site .snav-links a[href^='https://github.com'] { display: none; }
+  .sub > div { flex-wrap: nowrap !important; overflow-x: auto; }
+  .sub > div > span:last-child { display: none; }
+}

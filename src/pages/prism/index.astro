@@ -1,0 +1,212 @@
+---
+import Site from '../../layouts/Site.astro';
+import { u, version } from '../../lib/site';
+---
+<Site title={'PRISM: Programmable Routing & Item Sorting for ME'} description={'Rule-based item routing for AE2 subnets in GregTech: New Horizons, on OpenComputers.'} active="prism">
+<nav class="sub" aria-label="PRISM" style="border-bottom: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; color: #FF9F43; padding: 12px 0">PRISM</span>
+<a href={u("prism/")} style="color: #E6EAEE; box-shadow: inset 0 -2px 0 #FF9F43">Overview</a>
+<a href={u("prism/docs/")}>Docs</a>
+<a href="https://github.com/aharabedian/prism/blob/main/CHANGELOG.md">Changelog</a>
+<a href="https://github.com/aharabedian/prism">Source</a>
+<span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">v{version("prism")} · MIT</span>
+</div>
+</nav>
+
+<main>
+
+<section aria-labelledby="hero" style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; align-items: center; gap: 14px">
+<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><path d="M0 24 H14" stroke="#E6EAEE" stroke-width="2"/><path d="M20 6 L32 36 H8 Z" fill="#FF9F43" fill-opacity="0.12" stroke="#FF9F43" stroke-width="2" stroke-linejoin="round"/><path d="M25 21 L44 12" stroke="#FF9F43" stroke-width="2"/><path d="M26 24 L44 24" stroke="#FFB86B" stroke-width="2"/><path d="M27 27 L44 36" stroke="#FF9F43" stroke-width="2" stroke-opacity="0.6"/></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFB86B">Programmable Routing &amp; Item Sorting for ME</span>
+</div>
+<h1 id="hero" style="margin: 0; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.025em">One stream of ore in.<br><span style="color: #FF9F43">Every machine fed.</span></h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #B7C0C9; max-width: 560px">Stop hand-managing ore dictionary cards. A computer scans your AE2 subnet, decides where each item goes from pattern rules and per-item overrides, and configures export buses, stocking buses and interfaces to match. Built for GregTech: New Horizons ore processing; useful for any "send these items to that machine" job.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px">
+<a class="btn" href={u("prism/docs/")} style="background: #FF9F43; color: #1A0F02">Read the docs <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn" href="https://github.com/aharabedian/prism" style="background: #161B21; color: #E6EAEE; border: 1px solid #2A323B">aharabedian/prism</a>
+</div>
+</div>
+<figure style="flex: 1 1 560px; min-width: 0; margin: 0">
+<div style="background: #0F1317; border: 1px solid #232A32; border-radius: 12px; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1C2229; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">
+<span>prism-control — the control screen</span>
+<span style="color: #FF5C5C">5 alerts</span>
+</div>
+<img src={u("shots/prism/dashboard.png")} alt="PRISM control screen: processes with backlog bars, export buses with their filters, machines with working, idle, offline and no-power states, and a stall alert in the footer" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800">
+</div>
+</figure>
+</section>
+
+<section aria-labelledby="cycle" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; gap: 20px 64px; align-items: flex-end">
+<div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">How it works</p>
+<h2 id="cycle" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Every five seconds, one scan.</h2>
+</div>
+<p style="flex: 1 1 380px; margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">An unchanged network causes zero writes, and one item running out rewrites exactly one slot. Machines are polled every 2 s and feeders step every second in between.</p>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<li style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF9F43">01 · scan</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Read the subnet</h3>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #B7C0C9">Every item in the network, with stacks of the same item and damage merged.</p>
+</li>
+<li style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF9F43">02 · classify</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Decide where it goes</h3>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #B7C0C9">Screen override, then config override, then rules top to bottom. First match wins.</p>
+</li>
+<li style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF9F43">03 · share</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Spill to fallbacks</h3>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #B7C0C9">Past a backlog limit, items are shared with a second process until the queue recovers.</p>
+</li>
+<li style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF9F43">04 · apply</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Configure outputs</h3>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #B7C0C9">Each bus, stocker and interface gets its process's top items, ranked by priority then quantity.</p>
+</li>
+<li style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF9F43">05 · watch</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Detect stalls</h3>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #B7C0C9">Nothing moved for 60 s with work waiting? An alert, on the screen and in LENS.</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section aria-labelledby="outputs" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Outputs</p>
+<h2 id="outputs" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Four ways to deliver an item.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">Mix them freely across processes. They all share one interface in the code, so a fifth kind is one new module.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<div style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><h3 style="margin: 0; font-size: 19px; font-weight: 600">Export bus</h3><code class="i">bus</code></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Always holds the 9 highest-priority items waiting for its machine. Two Capacity Cards for 9 filter slots.</p>
+<p style="margin: 0; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #9AA5B1">top 9 · batch 1 · needs a database</p>
+</div>
+<div style="background: #12161B; border: 1px solid #4A3218; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><h3 style="margin: 0; font-size: 19px; font-weight: 600">Stocking input bus</h3><code class="i">stocker</code></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">The best fit for GT multiblocks: the machine pulls straight from the subnet, so there's no speed limit and batch recipes just work.</p>
+<p style="margin: 0; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #FFB86B">top 16 · any batch · no database</p>
+</div>
+<div style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><h3 style="margin: 0; font-size: 19px; font-weight: 600">ME interface</h3><code class="i">interface</code></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Another network pulls from it: send finished dusts to your main net through an import bus, without merging the two.</p>
+<p style="margin: 0; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #9AA5B1">top 9 · a stack each · batch 1</p>
+</div>
+<div style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><h3 style="margin: 0; font-size: 19px; font-weight: 600">Batch feeder</h3><code class="i">feeder</code></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Interface, transposer, machine. Sends exact multiples (2, 9, 36…) for recipes that would otherwise clog on leftovers.</p>
+<p style="margin: 0; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #9AA5B1">one item at a time · exact batches</p>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="rules" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Rules</p>
+<h2 id="rules" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Patterns you can read, with a live preview.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">Lua patterns on item names, top to bottom. The rule editor shows exactly which items a pattern catches, and whether an override or an earlier rule wins, before you save.</p>
+<pre class="code">rules = &#123;
+  &#123; pattern = <span class="s">"^Crushed .+ Ore$"</span>,         process = <span class="s">"wash"</span>, priority = <span class="n">10</span> &#125;,
+  &#123; pattern = <span class="s">"^Impure Pile of .+ Dust$"</span>, process = <span class="s">"centrifuge"</span> &#125;,
+  &#123; pattern = <span class="s">"^Cinnabar Dust$"</span>,          process = <span class="s">"centrifuge"</span>, batch = <span class="n">2</span> &#125;,
+  &#123; pattern = <span class="s">"Ore$"</span>,                     process = <span class="s">"crush"</span>, priority = <span class="n">5</span> &#125;,
+&#125;</pre>
+<p style="margin: 0; font-size: 14.5px; color: #9AA5B1"><code class="i">prism-setup</code> writes a starting set for the processes you pick. <a href={u("prism/docs/configuration/#rules")}>Writing your own →</a></p>
+</div>
+<figure style="flex: 1 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
+<img src={u("shots/prism/rule-editor.png")} alt="The RULES tab editing rule 1, pattern ^Crushed .+ Ore$, with a preview of two matching items and buttons for process, fallback, batch and priority" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 12px; border: 1px solid #232A32">
+<figcaption style="font-size: 13.5px; color: #9AA5B1">Editing a rule: the preview updates as you type.</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="fallbacks" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap-reverse; gap: 48px; align-items: center">
+<figure style="flex: 1 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
+<img src={u("shots/prism/fallbacks.png")} alt="A process panel showing a chemical bath sharing items with its ore washer fallback" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 12px; border: 1px solid #232A32">
+<figcaption style="font-size: 13.5px; color: #9AA5B1">A process sharing with its fallback, marked ↷.</figcaption>
+</figure>
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Fallbacks</p>
+<h2 id="fallbacks" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">When a machine falls behind, share the load.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">Chemical bath short on acid? Past its <code class="i">overflow</code>, items with a fallback are shared with the ore washer, lowest-ranked first. Sharing stops once the backlog is under three quarters of the limit, so items don't flip back and forth.</p>
+<pre class="code">processes = &#123; chembath = &#123; overflow = <span class="n">2000</span> &#125; &#125;,
+rules = &#123;
+  &#123; pattern = <span class="s">"^Crushed Platinum Ore$"</span>, process = <span class="s">"chembath"</span> &#125;,
+  &#123; pattern = <span class="s">"^Crushed .+ Ore$"</span>, process = <span class="s">"chembath"</span>, fallback = <span class="s">"wash"</span> &#125;,
+&#125;</pre>
+<p style="margin: 0; font-size: 15px; color: #9AA5B1">Or tap the process on the screen and choose ALWAYS SHARE.</p>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="features" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<h2 id="features" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Everything else in the box</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px 40px">
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Item catalog</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Every item ever seen, so you can set up routing before you have any in stock.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Machine monitoring</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">GT machines' working or idle state, progress, power and maintenance, through an adapter.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Stall alerts</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Stalled processes, idle machines with work waiting, blocked feeders. The screen beeps on new ones.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Tap to route</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Anything under UNASSIGNED is a tap away from a home: pick a process, priority, batch and fallback.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Hardware editor</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Added a bus later? <code class="i">prism-setup</code> opens a full-screen editor where you tap what each component is for.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Reports to LENS</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Backlog, machine states and alerts on the base dashboard and in your glasses. <a href={u("lens/")}>About LENS →</a></p></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; padding-top: 12px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/prism/route-item.png")} alt="Routing an unassigned item from the control screen" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">Routing an item</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/prism/fallback-items.png")} alt="The ITEMS list showing items and the fallbacks they share with" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">Items and their fallbacks</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/prism/setup-editor.png")} alt="The prism-setup hardware editor on a tier 2 screen" style="display: block; width: 100%; height: auto; aspect-ratio: 640 / 400; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">The hardware editor, tier 2</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="start" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 id="start" style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">Quick start</h2>
+<pre class="code"><span class="p">$</span> wget -f https://raw.githubusercontent.com/aharabedian/prism/main/src/prism-update.lua /home/prism-update.lua
+<span class="p">$</span> /home/prism-update</pre>
+<ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.6; color: #C9D1D9">
+<li>Run <code class="i">prism-setup</code> on the router and choose <strong>router</strong>. It walks through processes, buses, feeders, machines and wireless.</li>
+<li>Run <code class="i">prism-setup</code> on the control computer and choose <strong>control screen</strong>.</li>
+<li>Run <code class="i">prism</code> on the router and <code class="i">prism-control</code> on the screen.</li>
+<li>Tap anything under UNASSIGNED to route it, or write rules in the RULES tab.</li>
+</ol>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">What you need</h2>
+<div style="border: 1px solid #232A32; border-radius: 10px; overflow-x: auto">
+<table class="t">
+<thead><tr><th>Computer</th><th>Parts</th></tr></thead>
+<tbody>
+<tr><td style="white-space: nowrap; color: #FF9F43; font-weight: 600">Router</td><td>T2+ CPU, 2× T3.5 RAM, wireless card, adapters on the ME controller and each bus, a Database Upgrade, a Power Converter</td></tr>
+<tr><td style="white-space: nowrap; color: #FF9F43; font-weight: 600">Control</td><td>Tier 3 GPU and screen, keyboard, wireless card. Optional, but it's most of the fun</td></tr>
+<tr><td style="white-space: nowrap; color: #AEB8C2; font-weight: 600">Both</td><td>Lua 5.3 architecture; an Internet Card for <code class="i">prism-update</code></td></tr>
+</tbody>
+</table>
+</div>
+<p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #9AA5B1">Mind the component limit: a T3 CPU allows 16 components. A server in a rack with component buses goes much higher.</p>
+</div>
+</div>
+</section>
+
+<section aria-label="Part of the suite" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 56px 24px; display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center">
+<p style="flex: 1 1 480px; margin: 0; font-size: 18px; line-height: 1.6; color: #C9D1D9">PRISM runs on its own. Pair it with <a href={u("lens/")} style="color: #5EB4FF">LENS</a> for a base-wide dashboard and <a href={u("lumen/")} style="color: #4FD17A">LUMEN</a> to watch the power that keeps it running.</p>
+<a class="btn" href={u("guide/")} style="background: #161B21; color: #E6EAEE; border: 1px solid #2A323B">Putting the suite together</a>
+</div>
+</section>
+
+</main>
+</Site>

@@ -1,0 +1,31 @@
+{
+  "name": "spectra",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Spectra: PRISM, LENS and LUMEN, OpenComputers programs for GregTech: New Horizons",
+  "scripts": {
+    "fetch-docs": "node scripts/fetch-docs.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "check-links": "node scripts/check-links.mjs",
+    "check-facts": "node scripts/check-facts.mjs",
+    "site": "npm run fetch-docs && npm run check-facts && astro build && npm run check-links",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.43.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "astro": "^7.4.11"
+  },
+  "devDependencies": {
+    "mdast-util-from-markdown": "^2.1.0",
+    "mdast-util-gfm": "^3.1.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "unist-util-visit": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}

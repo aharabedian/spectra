@@ -1,0 +1,166 @@
+---
+import Site from '../../layouts/Site.astro';
+import { u, version } from '../../lib/site';
+---
+<Site title={'LENS: Live Engineering & Network Status'} description={'Base-wide monitoring for GregTech: New Horizons: one dashboard and an AR glasses HUD.'} active="lens">
+<nav class="sub" aria-label="LENS" style="border-bottom: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; color: #5EB4FF; padding: 12px 0">LENS</span>
+<a href={u("lens/")} style="color: #E6EAEE; box-shadow: inset 0 -2px 0 #5EB4FF">Overview</a>
+<a href={u("lens/docs/")}>Docs</a>
+<a href="https://github.com/aharabedian/lens/blob/main/CHANGELOG.md">Changelog</a>
+<a href="https://github.com/aharabedian/lens">Source</a>
+<span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">v{version("lens")} · MIT</span>
+</div>
+</nav>
+
+<main>
+
+<section aria-labelledby="hero" style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; align-items: center; gap: 14px">
+<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><path d="M0 6 L18 21" stroke="#FF9F43" stroke-width="2"/><path d="M0 22 L18 22" stroke="#4FD17A" stroke-width="2"/><path d="M0 38 L18 23" stroke="#C9D1D9" stroke-width="2" stroke-dasharray="3 3"/><path d="M22 4 C 29 14, 29 30, 22 40 C 15 30, 15 14, 22 4 Z" fill="#5EB4FF" fill-opacity="0.12" stroke="#5EB4FF" stroke-width="2"/><path d="M26 22 H40" stroke="#5EB4FF" stroke-width="2.5"/><circle cx="41" cy="22" r="3" fill="#5EB4FF"/></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #8CCBFF">Live Engineering &amp; Network Status</span>
+</div>
+<h1 id="hero" style="margin: 0; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.025em">Your whole base,<br><span style="color: #5EB4FF">at a glance.</span></h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #B7C0C9; max-width: 560px">PRISM splits one stream into many machines; LENS does the opposite. Every system in your base pushes its health, metrics and alerts, and the hub gathers them into one dashboard and an AR glasses HUD. It notices when one goes quiet, and it never sends a command back.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px">
+<a class="btn" href={u("lens/docs/")} style="background: #5EB4FF; color: #03121F">Read the docs <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn" href="https://github.com/aharabedian/lens" style="background: #161B21; color: #E6EAEE; border: 1px solid #2A323B">aharabedian/lens</a>
+</div>
+</div>
+<figure style="flex: 1 1 560px; min-width: 0; margin: 0">
+<div style="background: #0F1317; border: 1px solid #232A32; border-radius: 12px; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1C2229; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">
+<span>lens-hub — 1 node, 1 alert</span>
+<span style="color: #FF5C5C">BAD</span>
+</div>
+<img src={u("shots/lens/dashboard.png")} alt="The LENS hub: the prism-ore node in BAD health, an alert that mac2 has no power, and panels for ore backlog, machines down and machines running" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800">
+</div>
+</figure>
+</section>
+
+<section aria-labelledby="hud" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; gap: 20px 64px; align-items: flex-end">
+<div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">AR glasses HUD</p>
+<h2 id="hud" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">Alerts that follow you around.</h2>
+</div>
+<p style="flex: 1 1 380px; margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">With an OC Glasses terminal on the hub, blocks of bars, text lines and the newest alerts sit anywhere in your view. A thin strip down the side carries the base's overall health.</p>
+</div>
+<img src={u("shots/lens/hud-blocks.png")} alt="Three HUD blocks over a Minecraft dirt texture: power at 95 percent with net plus 2.4k EU/t and two alerts at the top, an ore backlog of 1.2M in the middle, and LENS OK in the corner" style="display: block; width: 100%; height: auto; aspect-ratio: 2430 / 1251; border-radius: 12px; border: 1px solid #232A32">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 40px">
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">A HUD for each player</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Each player links their glasses to their own terminal, and the hub places each HUD for its wearer's view.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Up to 8 presets</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">One for the base, one for mining, one for power. Switch between them from the dashboard.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Nearly free</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Widgets are made once and only changed values are sent: about zero calls a minute when nothing happens.</p></div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="queries" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Queries and rules</p>
+<h2 id="queries" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">A tiny PromQL for your base.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">Panels, HUD bars and the hub's own alerts are small queries over every node's metrics, including ones that span systems. Rather tap than type? The DATA page shows everything the agents send and builds queries for you.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9AA5B1">No data spreads: a comparison with nothing is nothing, and in a rule nothing counts as false, so a rule never fires just because a node went quiet.</p>
+<a href={u("lens/docs/queries/")} style="font-weight: 600; font-size: 15px">The query language →</a>
+</div>
+<div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 0; border: 1px solid #232A32; border-radius: 12px; overflow: hidden; background: #0F1317">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-bottom: 1px solid #1C2229"><code style="font: 14px/1.6 'IBM Plex Mono', monospace; color: #E6EAEE; overflow-x: auto; white-space: nowrap"><span class="fn">sum</span>(prism_machine_state&#123;process=<span class="s">"ore"</span>, state=<span class="s">"running"</span>&#125;)</code><span style="font-size: 14px; color: #9AA5B1">Machines running on the ore line</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-bottom: 1px solid #1C2229"><code style="font: 14px/1.6 'IBM Plex Mono', monospace; color: #E6EAEE; overflow-x: auto; white-space: nowrap"><span class="fn">sum</span>(lumen_stored_eu) / <span class="fn">sum</span>(lumen_capacity_eu)</code><span style="font-size: 14px; color: #9AA5B1">Power fill across every LSC, 0..1</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-bottom: 1px solid #1C2229"><code style="font: 14px/1.6 'IBM Plex Mono', monospace; color: #E6EAEE; overflow-x: auto; white-space: nowrap"><span class="fn">max</span>(prism_stalled_seconds&#123;node=<span class="s">"prism-ore"</span>&#125;) &gt; <span class="n">60</span></code><span style="font-size: 14px; color: #9AA5B1">The ore line has stalled for a minute: 1 or 0</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px"><code style="font: 14px/1.6 'IBM Plex Mono', monospace; color: #E6EAEE; overflow-x: auto; white-space: nowrap"><span class="fn">sum</span>(lumen_stored_eu) / <span class="fn">sum</span>(lumen_capacity_eu) &lt; <span class="n">0.25</span> <span class="p">and</span> <span class="fn">sum</span>(prism_backlog_items) &gt; <span class="n">0</span></code><span style="font-size: 14px; color: #9AA5B1">A rule across systems: busy ore line on low power</span></div>
+</div>
+<p style="margin: 0; font-size: 13.5px; color: #9AA5B1">Selectors take <code class="i">=</code>, <code class="i">!=</code>, <code class="i">=~</code> and <code class="i">!~</code>; functions <code class="i">sum</code> <code class="i">max</code> <code class="i">min</code> <code class="i">avg</code> <code class="i">count</code> <code class="i">rate</code>.</p>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="principles" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<h2 id="principles" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em; max-width: 720px">An observer, by design.</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+<div style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5EB4FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Watches, never controls</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Messages flow from agents to the hub. To stop a system, go to it: control lives on its own screen.</p>
+</div>
+<div style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5EB4FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Notices silence</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">An agent that stops reporting (crashed, unloaded chunk, out of range) turns STALE and raises a BAD alert.</p>
+</div>
+<div style="background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5EB4FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Set up on the screen</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">EDIT pages and panels with a keyboard, previewed as you type. Tap an alert to acknowledge it; LOG shows what happened while you were away.</p>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/lens/data.png")} alt="The DATA page listing every metric the agents send" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">DATA: build a query by tapping</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/lens/view-editor.png")} alt="The view editor with a typed query and a live preview" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">EDIT: a view, previewed as you type</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/lens/log.png")} alt="The alert log with alerts happening now and alerts that have ended" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">LOG: what happened while you were away</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="agents" style="border-top: 1px solid #1C2229">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA5B1">Agents</p>
+<h2 id="agents" style="margin: 0; font-size: 38px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em">What reports to LENS today</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+<a class="card-link" href={u("prism/")}><div class="card" style="height: 100%; box-sizing: border-box; background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 20px; letter-spacing: 0.06em; color: #FF9F43">PRISM</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Backlog per process, machine states, stalls and its alerts. 1.2.0 or newer.</p>
+<span style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #9AA5B1">prism_backlog_items · prism_machine_state</span>
+</div></a>
+<a class="card-link" href={u("lumen/")}><div class="card" style="height: 100%; box-sizing: border-box; background: #12161B; border: 1px solid #232A32; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 20px; letter-spacing: 0.06em; color: #4FD17A">LUMEN</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Every LSC's fill, flows and drain time; generators, reactors and switches.</p>
+<span style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #9AA5B1">lumen_stored_eu · lumen_fill_ratio</span>
+</div></a>
+<a class="card-link" href={u("lens/docs/telemetry/")}><div class="card" style="height: 100%; box-sizing: border-box; background: transparent; border: 1px dashed #2A323B; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 20px; letter-spacing: 0.06em; color: #C9D1D9">Yours</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Anything that speaks <code class="i">lens/1</code> shows up. Health, metrics and alerts in one serialized table.</p>
+<span style="margin-top: auto; font-size: 14px; font-weight: 600; color: #8CCBFF">Write an agent →</span>
+</div></a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 32px; padding: 20px 24px; border: 1px solid #1C2229; border-radius: 12px; background: #0D1014">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9AA5B1; padding-top: 2px">Roadmap</span>
+<span style="font-size: 15px; color: #C9D1D9">History graphs on the dashboard, longer than a panel's sparkline</span>
+<span style="font-size: 15px; color: #C9D1D9">More agents as the base grows</span>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="start" style="border-top: 1px solid #1C2229; background: #0D1014">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 id="start" style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">Quick start</h2>
+<pre class="code"><span class="p">$</span> wget -f https://raw.githubusercontent.com/aharabedian/lens/main/src/lens-update.lua /home/lens-update.lua
+<span class="p">$</span> /home/lens-update</pre>
+<ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.6; color: #C9D1D9">
+<li>On each PRISM router, turn on <strong>LENS monitoring</strong> in <code class="i">prism-setup</code> and restart <code class="i">prism</code>.</li>
+<li>On the hub, run <code class="i">lens-setup</code>: it finds the agents and offers their panels and HUD lines.</li>
+<li>Run <code class="i">lens-hub</code>, or reboot if you chose start on boot.</li>
+</ol>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">What you need</h2>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0; border: 1px solid #232A32; border-radius: 10px; overflow: hidden">
+<li style="padding: 14px 18px; border-bottom: 1px solid #1C2229; font-size: 15px; line-height: 1.55; color: #C9D1D9"><strong style="color: #E6EAEE">A hub computer</strong> with a tier 3 GPU and screen (tier 2 works) and a keyboard</li>
+<li style="padding: 14px 18px; border-bottom: 1px solid #1C2229; font-size: 15px; line-height: 1.55; color: #C9D1D9"><strong style="color: #E6EAEE">A network card</strong> that reaches the agents: wireless, wired, or linked cards across dimensions</li>
+<li style="padding: 14px 18px; border-bottom: 1px solid #1C2229; font-size: 15px; line-height: 1.55; color: #C9D1D9"><strong style="color: #E6EAEE">An agent</strong>: PRISM 1.2.0 or newer, or LUMEN</li>
+<li style="padding: 14px 18px; font-size: 15px; line-height: 1.55; color: #C9D1D9"><strong style="color: #E6EAEE">Optional:</strong> a Glasses Terminal per player for the HUD. No adapters or database needed: the hub only listens</li>
+</ul>
+</div>
+</div>
+</section>
+
+</main>
+</Site>

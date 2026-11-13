@@ -1,0 +1,25 @@
+---
+// The docs sidebar: which project you're in, then its pages (filtered in route-middleware.ts).
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import { projectOfDoc, u, version } from '../../lib/site';
+const p = projectOfDoc(Astro.locals.starlightRoute.id);
+---
+<div class="sb-head">
+  {p ? (
+    <>
+      <a class="sb-name" href={u(`${p.id}/`)}>{p.name}</a>
+      <span class="sb-sub">{p.expansion}</span>
+      <span class="sb-meta">
+        <span>v{version(p.id as any)}</span>
+        <a href={u(`${p.id}/`)}>Overview</a>
+        <a href={`https://github.com/${p.repo}`}>Source</a>
+      </span>
+    </>
+  ) : (
+    <>
+      <span class="sb-name">SUITE DOCS</span>
+      <span class="sb-sub">How PRISM, LENS and LUMEN fit together</span>
+    </>
+  )}
+</div>
+<Default />
