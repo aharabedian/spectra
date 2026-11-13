@@ -10,6 +10,9 @@ const built: Record<string, Built> = Object.values(generated)[0]?.default ?? {};
 export const u = (path = '') => base + path.replace(/^\//, '');
 
 export type ProjectId = 'prism' | 'lens' | 'lumen';
+/** Which part of the site a page is in (the top bar), and which section of it (the bar below). */
+export type Area = 'suite' | ProjectId;
+export type Section = 'overview' | 'docs';
 export const project = (id: string) => projects.find((p) => p.id === id);
 
 /** The version the docs were built from: "1.2.0", or "1.2.0+abc1234" when following main. */

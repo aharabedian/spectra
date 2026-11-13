@@ -10,6 +10,7 @@ import '@fontsource/ibm-plex-mono/600.css';
 import '../styles/tokens.css';
 import '../styles/site.css';
 import SiteNav from '../components/SiteNav.astro';
+import SubNav from '../components/SubNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { u } from '../lib/site';
 
@@ -19,6 +20,7 @@ interface Props {
   active: 'home' | 'prism' | 'lens' | 'lumen';
 }
 const { title, description, active } = Astro.props;
+const current = active === 'home' ? 'suite' : active;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -39,8 +41,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 <body class="site" data-project={active}>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="site-header-in"><SiteNav active={active === 'home' ? undefined : active} /></div>
+    <div class="site-header-in"><SiteNav current={current} section="overview" /></div>
   </header>
+  <div class="site-subnav"><div class="site-subnav-in"><SubNav current={current} section="overview" /></div></div>
   <div id="main"><slot /></div>
   <SiteFooter />
 </body>
