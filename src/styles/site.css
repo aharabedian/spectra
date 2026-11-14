@@ -16,6 +16,7 @@ body.site { margin: 0; background: var(--sp-bg); color: var(--sp-text); font-fam
 .site-header { border-bottom: 1px solid var(--sp-line-soft); }
 .site-header-in { max-width: 1240px; margin: 0 auto; padding: 12px 24px; }
 .site .snav-brand, .site .snav-brand:hover { color: var(--sp-text) !important; text-decoration: none !important; }
+.site .snav-brand:hover, .snav-brand:hover { background: var(--sp-surface-2); }
 .site .snav .navlink { color: #AEB8C2; }
 .site .snav .navlink:hover, .site .snav .navlink[aria-current='page'] { color: var(--sp-text); text-decoration: none; }
 

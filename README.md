@@ -85,6 +85,7 @@ PRISM_REF=v1.1.0 npm run fetch-docs                      # one project from a gi
 | `src/components/` | `SiteNav` (top bar: the suite or a project, staying in Overview or Docs) and `SubNav` (that area's Overview, Docs, Changelog, Source), on every page |
 | `src/components/starlight/` | Starlight overrides: the header (both bars), the page title's crumb, dark-only theme |
 | `src/route-middleware.ts` | Gives each project's docs their own sidebar and previous/next links, and where the top bar's links go from a docs page (the same page in another project when it has one) |
+| `src/assets/mark.svg`, `public/` icons, `public/social/` | From the logo kit ("Hub"): the small mark for the top bar (30 px), `favicon.svg`/`.ico` and `apple-touch-icon.png`, and the Open Graph image |
 | `src/styles/` | `tokens.css` (palette, shared bits), `site.css` (landing pages), `starlight.css` (docs) |
 | `scripts/` | `fetch-docs.mjs`, `check-facts.mjs`, `check-links.mjs` |
 | `extras/project-repo/` | The workflow each project repo needs (below) |
