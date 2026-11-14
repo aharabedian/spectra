@@ -13,6 +13,14 @@ export default defineConfig({
       description: 'PRISM, LENS and LUMEN: OpenComputers programs for running a GregTech: New Horizons base.',
       logo: { src: './src/assets/mark.svg', alt: '' },
       favicon: '/favicon.svg',
+      // The rest of the logo kit's head tags (src/layouts/Site.astro has the same for the landing pages).
+      head: [
+        { tag: 'link', attrs: { rel: 'icon', href: `${base}favicon.ico`, sizes: '48x48' } },
+        { tag: 'link', attrs: { rel: 'apple-touch-icon', href: `${base}apple-touch-icon.png` } },
+        { tag: 'meta', attrs: { property: 'og:image', content: new URL(`${base}social/spectra-og-1200x630.png`, site).href } },
+        { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
+        { tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
+      ],
       customCss: [
         '@fontsource/ibm-plex-sans/400.css',
         '@fontsource/ibm-plex-sans/500.css',
