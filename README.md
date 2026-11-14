@@ -1,18 +1,48 @@
-# Spectra
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/spectra-lockup-horizontal-color.svg">
+    <img alt="SPECTRA" src=".github/assets/spectra-lockup-horizontal-color-on-light.svg" width="360">
+  </picture>
+</p>
 
-The website for **Spectra**: [PRISM](https://github.com/aharabedian/prism) (item routing),
-[LENS](https://github.com/aharabedian/lens) (base-wide monitoring) and
-[LUMEN](https://github.com/aharabedian/lumen) (power), OpenComputers programs for running a
-GregTech: New Horizons base.
+<p align="center">
+  <b>Route the items. Watch the power. See the whole base.</b><br>
+  OpenComputers programs for running a GregTech: New Horizons base.
+</p>
 
-This repo holds the home page, the three project landing pages, the suite guide and the styling. **Each
-project's docs stay in its own repo** (`README.md` and `docs/*.md`) and are pulled in when the site builds,
-so they're written once, read on GitHub or here, and never copied by hand.
+<p align="center">
+  <a href="https://aharabedian.github.io/spectra/"><b>Website and docs</b></a> ·
+  <a href="https://aharabedian.github.io/spectra/guide/">Putting the suite together</a>
+</p>
 
-Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build); published to GitHub
-Pages.
+SPECTRA is three small projects for [OpenComputers](https://github.com/GTNewHorizons/OpenComputers) in
+GregTech: New Horizons. Each runs on its own computer and is useful alone; turn on LENS reporting and
+PRISM and LUMEN show up on one dashboard and in your AR glasses.
 
-## How the docs get here
+| | Project | What it does | |
+|---|---|---|---|
+| 🟧 | **[PRISM](https://github.com/aharabedian/prism)**<br><sub>Programmable Routing & Item Sorting for ME</sub> | Routes items from an AE2 subnet to your machines by pattern rules, shares the load when one falls behind, and alerts on stalls. Touchscreen control panel | [Overview](https://aharabedian.github.io/spectra/prism/) · [Docs](https://aharabedian.github.io/spectra/prism/docs/) |
+| 🟦 | **[LENS](https://github.com/aharabedian/lens)**<br><sub>Live Engineering & Network Status</sub> | Gathers every system's health, metrics and alerts into one dashboard and an AR glasses HUD. Watches, never controls | [Overview](https://aharabedian.github.io/spectra/lens/) · [Docs](https://aharabedian.github.io/spectra/lens/docs/) |
+| 🟩 | **[LUMEN](https://github.com/aharabedian/lumen)**<br><sub>Load, Usage & Management of Energy Networks</sub> | Every Lapotronic Supercapacitor on one screen, with history and alerts that don't cry wolf; switches generators with the fill | [Overview](https://aharabedian.github.io/spectra/lumen/) · [Docs](https://aharabedian.github.io/spectra/lumen/docs/) |
+
+Each installs with two lines on an OpenComputers computer with an Internet Card:
+
+```
+wget -f https://raw.githubusercontent.com/aharabedian/prism/main/src/prism-update.lua /home/prism-update.lua
+/home/prism-update
+```
+
+(`lens-update` and `lumen-update` the same way.) Lua 5.3 architecture, MIT licensed, and tested against a
+mocked OpenComputers, AE2 and GregTech world, so every screen on the site is a real render.
+
+## About this repo
+
+This repo is the website: the home page, the three project landing pages, the suite guide and the styling.
+**Each project's docs stay in its own repo** (`README.md` and `docs/*.md`) and are pulled in when the site
+builds, so they're written once, read on GitHub or on the site, and never copied by hand. Built with
+[Astro](https://astro.build) and [Starlight](https://starlight.astro.build); published to GitHub Pages.
+
+### How the docs get here
 
 ```
 prism / lens / lumen                         spectra
@@ -42,7 +72,7 @@ The nightly run and pushes to this repo rebuild too.
 | `![...](images/x.png)` | an optimized image; also copied to `/shots/<id>/` for the landing pages |
 | `> [!NOTE]`, `> [!WARNING]`... (GitHub alerts) | a Starlight aside in the site's colors |
 
-### Writing docs in a project repo
+#### Writing docs in a project repo
 
 Write for GitHub and the site follows:
 
@@ -57,7 +87,7 @@ Write for GitHub and the site follows:
 Docs changes reach the site with the next release. To show a fix sooner, run **Deploy** by hand from the
 Actions tab with `ref` set to `main`, or set that project's `ref: 'main'` in `spectra.config.mjs`.
 
-## Working on the site
+### Working on the site
 
 Needs Node 22.23.4 or newer (Astro's minimum).
 
@@ -98,23 +128,21 @@ release changes what a landing page describes, update the page.
 The landing pages' screenshots come from `/shots/<id>/`, the images fetched with the docs, so they update
 when the projects re-render their screens. Version numbers come from the release tags.
 
-## Setting up (once)
+### Publishing
 
-1. **This repo:** push it to `aharabedian/spectra`. In **Settings → Pages**, set **Source** to **GitHub
-   Actions**. The first push deploys to `https://aharabedian.github.io/spectra/`.
-2. **A token:** create a fine-grained personal access token with access to **only** `aharabedian/spectra`
-   and the **Contents: Read and write** repository permission (what `repository_dispatch` needs).
-3. **Each project repo** (prism, lens, lumen): add the token as an Actions secret named
-   `SPECTRA_DISPATCH_TOKEN`, and copy
+Pushes to `main` deploy to GitHub Pages (**Settings → Pages → Source: GitHub Actions**), and a nightly run
+picks up new project releases within a day. To rebuild the moment a project publishes a release instead:
+
+1. Create a fine-grained personal access token with access to **only** `aharabedian/spectra` and the
+   **Contents: Read and write** repository permission (what `repository_dispatch` needs).
+2. In each project repo, add it as an Actions secret named `SPECTRA_DISPATCH_TOKEN` and copy
    [`extras/project-repo/.github/workflows/notify-spectra.yml`](extras/project-repo/.github/workflows/notify-spectra.yml)
-   to `.github/workflows/`. Publishing a release now rebuilds the site; you can also run it by hand.
+   to `.github/workflows/`.
 
-Skip steps 2 and 3 and the nightly build still picks up new releases within a day.
-
-**A custom domain later** (say `spectra.aharabedian.com`): set `base = '/'` and `site` in
-`spectra.config.mjs`, add `public/CNAME` containing the domain, and point a CNAME record at
-`aharabedian.github.io`. Every link is built from `base`, so nothing else changes.
+**On a custom domain:** set `base = '/'` and `site` in `spectra.config.mjs`, add `public/CNAME` containing
+the domain, and point a CNAME record at `aharabedian.github.io`. Every link is built from `base`, so
+nothing else changes.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). A fan project, not affiliated with GregTech: New Horizons, OpenComputers or Applied Energistics 2.
