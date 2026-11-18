@@ -1,34 +1,34 @@
 ---
-// The top bar: which part of Spectra you're in. The logo is the suite's link, then one per project.
-// Links keep you in the same section: from a landing page they go to the other landing pages (the logo
-// to the home page), from the docs to the other docs (the logo to the suite guide; a project's link to
-// the same page when it has one, `docsHrefs` from route-middleware.ts). Used by the landing pages
-// and, through starlight/Header.astro, by every docs page (with Starlight's search in the slot).
-import { u, projects, type Area, type Section } from '../lib/site';
-import Mark from '../assets/mark.svg'; // the Spectra logo (public/favicon.svg is its copy for the tab)
-interface Props { current: Area; section: Section; docsHrefs?: Record<string, string>; }
-const { current, section, docsHrefs = {} } = Astro.props;
-const docs = section === 'docs';
-const items = projects.map((p) => ({
-  id: p.id, label: p.name, accent: p.accent,
-  href: docs ? docsHrefs[p.id] ?? u(`${p.id}/docs/`) : u(`${p.id}/`),
-}));
+// The top bar, the same on every page: the SPECTRA logo (home) on the left; one link per project (its landing
+// page) and Docs (the docs index) centered on the page; search and GitHub on the right. Each link goes to the
+// same place from every page. The item the page belongs to is marked current: its project on a landing page,
+// Docs on every docs page.
+// Used by src/layouts/Site.astro (home and landing pages) and starlight/Header.astro (docs).
+import Search from '@astrojs/starlight/components/Search.astro';
+import { u, projects, suite, type Place } from '../lib/site';
+import Mark from '../assets/mark.svg'; // the SPECTRA logo (public/favicon.svg is its copy for the tab)
+interface Props { current?: Place; }
+const { current } = Astro.props;
 ---
 <div class="snav">
-  <a class="snav-brand" aria-label="SPECTRA" href={docs ? u('guide/') : u()} aria-current={current === 'suite' ? 'page' : undefined}>
+  <a class="snav-brand" href={u()} aria-label={`${suite.name} home`} aria-current={current === 'home' ? 'page' : undefined}>
     <Mark width={30} height={30} aria-hidden="true" />
-    <span class="snav-word">SPECTRA</span>
+    <span class="snav-word">{suite.name}</span>
   </a>
-  <slot />
-  <nav class="snav-links" aria-label="Spectra">
-    {items.map((i) => (
-      <a class="navlink" href={i.href} aria-current={i.id === current ? 'page' : undefined}>
-        <span class="navdot" style={`background: ${i.accent}`}></span>{i.label}
+  <nav class="snav-links" aria-label={suite.name}>
+    {projects.map((p) => (
+      <a class="navlink" href={u(`${p.id}/`)} aria-current={p.id === current ? 'page' : undefined}>
+        <span class="navdot" style={`background: ${p.accent}`}></span>{p.name}
       </a>
     ))}
-    <a class="navlink" href="https://github.com/aharabedian/spectra" aria-label="SPECTRA on GitHub">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-      <span class="snav-gh">GitHub</span>
-    </a>
+    <span class="snav-sep" aria-hidden="true"></span>
+    <a class="navlink" href={u('docs/')} aria-current={current === 'docs' ? 'true' : undefined}>Docs</a>
   </nav>
+  <div class="snav-end">
+    <div class="snav-search"><Search /></div>
+    <a class="navlink snav-gh" href={`https://github.com/${suite.repo}`} aria-label={`${suite.name} on GitHub`}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+      <span class="snav-gh-word">GitHub</span>
+    </a>
+  </div>
 </div>

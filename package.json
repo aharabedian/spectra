@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "version": "0.1.0",
-  "description": "Spectra: PRISM, LENS and LUMEN, OpenComputers programs for GregTech: New Horizons",
+  "description": "SPECTRA: PRISM, LENS and LUMEN, OpenComputers programs for GregTech: New Horizons",
   "scripts": {
     "fetch-docs": "node scripts/fetch-docs.mjs",
     "dev": "astro dev",

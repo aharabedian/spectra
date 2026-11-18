@@ -13,23 +13,16 @@ body.site { margin: 0; background: var(--sp-bg); color: var(--sp-text); font-fam
 .skip { position: absolute; left: -9999px; top: 8px; z-index: 10; background: var(--sp-text); color: var(--sp-bg) !important; padding: 8px 12px; border-radius: 6px; }
 .skip:focus { left: 8px; }
 
-.site-header { border-bottom: 1px solid var(--sp-line-soft); }
-.site-header-in { max-width: 1240px; margin: 0 auto; padding: 12px 24px; }
+.site-header { height: var(--sp-top-h); padding: 0 var(--sl-nav-pad-x); border-bottom: 1px solid var(--sp-line-soft); background: var(--sp-bg); }
 .site .snav-brand, .site .snav-brand:hover { color: var(--sp-text) !important; text-decoration: none !important; }
-.site .snav-brand:hover, .snav-brand:hover { background: var(--sp-surface-2); }
 .site .snav .navlink { color: #AEB8C2; }
-.site .snav .navlink:hover, .site .snav .navlink[aria-current='page'] { color: var(--sp-text); text-decoration: none; }
+.site .snav .navlink:hover, .site .snav .navlink[aria-current] { color: var(--sp-text); text-decoration: none; }
 
 .btn { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; padding: 13px 20px; border-radius: 8px; }
 .site a.btn:hover { text-decoration: none; filter: brightness(1.08); }
 .card-link { color: inherit !important; }
 .card-link:hover { text-decoration: none !important; }
 .card-link:hover .card { border-color: #3A444F !important; }
-
-.site-subnav { border-bottom: 1px solid var(--sp-line-soft); background: var(--sp-bg-2); }
-.site-subnav-in { max-width: 1240px; margin: 0 auto; padding: 0 24px; height: 46px; }
-.site .subnav .subnav-link { color: #AEB8C2; }
-.site .subnav .subnav-link:hover, .site .subnav .subnav-link[aria-current='page'] { color: var(--sp-text); text-decoration: none; }
 
 pre.code { margin: 0; background: var(--sp-code-bg); border: 1px solid var(--sp-line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font: 13.5px/1.7 var(--sp-mono); color: #D5DCE3; white-space: pre; }
 .c { color: #7D8894; } .s { color: #9BE59B; } .n { color: #FFB86B; } .fn { color: #C2E3FF; }
@@ -48,12 +41,14 @@ table.t tr:last-child td { border-bottom: none; }
 .itab { appearance: none; border: none; cursor: pointer; font: 600 14px var(--sp-mono); letter-spacing: 0.06em; padding: 14px 22px; min-height: 48px; background: transparent; color: var(--sp-muted); box-shadow: inset 0 -2px 0 transparent; }
 .itab[aria-selected='true'] { background: var(--sp-surface); color: var(--tab); box-shadow: inset 0 -2px 0 var(--tab); }
 .itab:hover { color: var(--sp-text); }
+.itabs [role='tabpanel'][hidden] { display: none !important; } /* the panels' inline display: flex would show them */
 
 /* Footer */
 .foot { border-top: 1px solid var(--sp-line-soft); background: var(--sp-bg-2); }
 .foot-in { max-width: 1240px; margin: 0 auto; padding: 56px 24px 40px; display: flex; flex-direction: column; gap: 40px; }
 .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
 .foot-brand p { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--sp-muted); }
+.foot-brand .foot-exp { margin-top: 8px; font-family: var(--sp-mono); font-size: 12px; line-height: 1.5; color: var(--sp-text-3); }
 .foot nav { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
 .foot-h { font-family: var(--sp-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
 .site .foot a { color: #AEB8C2; }
@@ -63,9 +58,4 @@ table.t tr:last-child td { border-bottom: none; }
 @media (max-width: 640px) {
   .site h1 { font-size: 40px !important; }
   .site h2 { font-size: 30px !important; }
-  /* One scrolling row for the top bar and the project bar instead of wrapping; GitHub is in the footer. */
-  .site .snav-links { margin-left: 0; width: 100%; flex-wrap: nowrap; overflow-x: auto; }
-  .site .snav-links a[href^='https://github.com'] { display: none; }
-  .sub > div { flex-wrap: nowrap !important; overflow-x: auto; }
-  .sub > div > span:last-child { display: none; }
 }

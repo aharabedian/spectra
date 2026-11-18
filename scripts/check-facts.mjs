@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// check-facts.mjs: the landing pages and the suite guide are written by hand, so they can drift from the
+// check-facts.mjs: the home and landing pages are written by hand, so they can drift from the
 // projects they describe. After fetch-docs, check that every name they quote still appears somewhere in the
 // projects' docs: programs (prism-setup), metrics (lumen_stored_eu), config keys in code samples
 // (lensPort = ...) and anything in inline code. Exits 1 on a missing name, so a rename in a project
@@ -16,9 +16,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT = path.join(ROOT, 'src/content/docs');
 
 /** Names quoted on the site that the projects' docs don't need to contain. */
-const IGNORE = new Set([
-  'lib/<name>/', // the guide's placeholder for lib/prism/, lib/lens/, lib/lumen/
-]);
+const IGNORE = new Set([]);
 
 const read = (f) => fs.readFileSync(f, 'utf8');
 const walk = (dir) =>
@@ -35,10 +33,7 @@ const corpus = projects
   .join('\n');
 
 // What the site says: the hand-written pages.
-const sources = [
-  ...walk(path.join(ROOT, 'src/pages')).filter((f) => f.endsWith('.astro')),
-  ...walk(path.join(CONTENT, 'guide')).filter((f) => f.endsWith('.md')),
-];
+const sources = walk(path.join(ROOT, 'src/pages')).filter((f) => f.endsWith('.astro'));
 
 const decode = (s) => s.replace(/<[^>]+>/g, '').replace(/&#123;/g, '{').replace(/&#125;/g, '}')
   .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
@@ -48,11 +43,11 @@ function namesIn(text) {
   const ids = projects.map((p) => p.id).join('|');
   // Programs, metrics and config files: prism-setup, lumen_stored_eu, lens-hub.cfg.
   for (const m of text.matchAll(new RegExp(`\\b(?:${ids})[-_][a-z0-9_]+(?:\\.cfg)?\\b`, 'g'))) names.add(m[0]);
-  // Inline code: <code class="i">x</code> on the pages, `x` in the guide.
-  for (const m of text.matchAll(/<code class="i">([\s\S]*?)<\/code>|`([^`\n]+)`/g)) names.add((m[1] !== undefined ? decode(m[1]) : m[2]).trim());
-  // Config keys in code samples: <pre class="code"> on the pages, ```lua in the guide.
-  for (const m of text.matchAll(/<pre class="code">([\s\S]*?)<\/pre>|```lua[^\n]*\n([\s\S]*?)```/g)) {
-    for (const k of (m[1] !== undefined ? decode(m[1]) : m[2]).matchAll(/\b([A-Za-z_]\w*)\s*=(?!=)/g)) names.add(k[1]);
+  // Inline code: <code class="i">x</code>.
+  for (const m of text.matchAll(/<code class="i">([\s\S]*?)<\/code>/g)) names.add(decode(m[1]).trim());
+  // Config keys in code samples: <pre class="code">.
+  for (const m of text.matchAll(/<pre class="code">([\s\S]*?)<\/pre>/g)) {
+    for (const k of decode(m[1]).matchAll(/\b([A-Za-z_]\w*)\s*=(?!=)/g)) names.add(k[1]);
   }
   return names;
 }

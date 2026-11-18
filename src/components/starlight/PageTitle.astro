@@ -1,17 +1,17 @@
 ---
-// The page title, under a crumb back to the start of the docs it belongs to.
+// The page title, under a line that says whose docs these are and which release they describe.
 import Default from '@astrojs/starlight/components/PageTitle.astro';
-import { projectOfDoc, u } from '../../lib/site';
+import { projectOfDoc, version, type ProjectId } from '../../lib/site';
 const route = Astro.locals.starlightRoute;
 const p = projectOfDoc(route.id);
-const crumb = route.entry.data.template !== 'splash';
 ---
-{crumb && <a class="doc-crumb" href={p ? u(`${p.id}/docs/`) : u('guide/')}>{p ? `${p.name} docs` : 'SPECTRA docs'}</a>}
+{p && route.entry.data.template !== 'splash' && (
+  <p class="doc-crumb"><span class="navdot" style={`background: ${p.accent}`}></span>{p.name} docs · v{version(p.id as ProjectId)}</p>
+)}
 <Default />
 <style>
   .doc-crumb {
-    display: inline-block; margin-bottom: 0.75rem; font-family: var(--sp-mono); font-size: 13px;
-    color: var(--sp-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 8px; margin: 0 0 0.75rem; font-family: var(--sp-mono); font-size: 13px;
+    color: var(--sp-muted);
   }
-  .doc-crumb:hover { color: var(--sp-text); }
 </style>

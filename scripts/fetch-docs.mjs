@@ -5,7 +5,8 @@
 //   1. picks the ref to build from: the newest vX.Y.Z tag, or main (see `ref` in the config);
 //   2. shallow-clones that ref into .cache/<id>/ (or uses a local checkout, see SPECTRA_LOCAL);
 //   3. writes src/content/docs/<id>/docs/*.md with frontmatter (title from the # heading, sidebar order,
-//      edit link) and links rewritten for the site; README.md becomes the docs' index page ("Overview");
+//      edit link) and links rewritten for the site; README.md becomes the docs' index page ("Introduction"),
+//      without its row of links to the site (on the site they'd point at the page you're on);
 //   4. copies docs/images/ next to them, and into public/shots/<id>/ for the landing pages;
 //   5. records the version and commit in src/data/projects.json.
 //
@@ -26,7 +27,7 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 import { gfmFromMarkdown } from 'mdast-util-gfm';
 import { gfm } from 'micromark-extension-gfm';
 import { visit } from 'unist-util-visit';
-import { base, projects } from '../spectra.config.mjs';
+import { base, site, projects, suite } from '../spectra.config.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE = path.join(ROOT, '.cache');
@@ -84,6 +85,10 @@ function readVersion(dir) {
 }
 
 const slugOf = (file) => file.replace(/\.md$/i, '').toLowerCase();
+/** What the site calls a project's README. */
+const README_TITLE = 'Introduction';
+/** The site's own address, as project docs write it: https://aharabedian.github.io/spectra/ */
+const SITE_URL = new URL(base, site).href;
 const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 const siteUrl = (p) => `${base}${p}`;
 
@@ -92,6 +97,10 @@ const siteUrl = (p) => `${base}${p}`;
  * kind: "link" or "image"; src: the file's path in its repo (README.md, docs/setup.md).
  */
 function rewriteUrl(url, kind, p, src, ref) {
+  // Links to the site itself become site-relative, so check-links can check them.
+  if (url.startsWith(SITE_URL)) return base + url.slice(SITE_URL.length);
+  // The SPECTRA repo ("Part of SPECTRA") is the site's home page here.
+  if (new RegExp(`^https://github\\.com/${suite.repo}/?(#.*)?$`, 'i').test(url)) return base;
   // Links to the sibling repos on GitHub become links into the site.
   const gh = url.match(/^https:\/\/github\.com\/([\w.-]+\/[\w.-]+?)(?:\.git)?(?:\/(?:blob|tree)\/[^/]+\/([^#?]*))?\/?(#.*)?$/i);
   if (gh) {
@@ -190,6 +199,21 @@ function convertAlerts(md) {
   return applyEdits(md, edits);
 }
 
+/** Drop a README's row of links to the site (Website · Docs · Changelog · Install): a paragraph that links to
+ *  the project's own docs. On GitHub it sends readers to the site; on the site it points at itself, and the
+ *  sidebar already has the changelog. */
+function dropSiteLinkRow(md, p) {
+  const docs = `${SITE_URL}${p.id}/docs/`;
+  const edits = [];
+  for (const node of parse(md).children) {
+    if (node.type !== 'paragraph' || !node.position) continue;
+    let links = false;
+    visit(node, 'link', (l) => { if (l.url === docs) links = true; });
+    if (links) edits.push([node.position.start.offset, node.position.end.offset, '']);
+  }
+  return applyEdits(md, edits);
+}
+
 const transform = (md, p, src, ref) => convertAlerts(rewriteLinks(md, p, src, ref));
 
 /** Take the first "# Heading" as the title and drop it from the body. Titles are plain text on the site
@@ -207,7 +231,7 @@ function writeDoc(p, co, srcRel, outName, orderIndex) {
   const raw = fs.readFileSync(path.join(co.dir, srcRel), 'utf8');
   const isReadme = /^readme\.md$/i.test(srcRel);
   const { title, body } = splitTitle(raw);
-  const pageTitle = isReadme ? 'Overview' : title ?? outName.replace(/\.md$/, '');
+  const pageTitle = isReadme ? README_TITLE : title ?? outName.replace(/\.md$/, '');
   const fm = [
     '---',
     `title: ${yaml(pageTitle)}`,
@@ -220,7 +244,7 @@ function writeDoc(p, co, srcRel, outName, orderIndex) {
   ].filter((l) => l !== null).join('\n');
   const notice = `<!-- Generated from ${p.repo}/${srcRel} at ${co.ref} (${co.sha}) by scripts/fetch-docs.mjs. Edit it there. -->\n\n`;
   const out = path.join(CONTENT, p.id, 'docs', outName);
-  fs.writeFileSync(out, fm + notice + transform(body, p, srcRel, co.ref));
+  fs.writeFileSync(out, fm + notice + transform(isReadme ? dropSiteLinkRow(body, p) : body, p, srcRel, co.ref));
 }
 
 function copyDir(from, to) {
@@ -239,7 +263,7 @@ for (const p of projects) {
   const co = checkout(p);
   checkouts.set(p.id, co);
   const docsDir = path.join(co.dir, 'docs');
-  titles.set(`${p.id}:README.md`, 'Overview');
+  titles.set(`${p.id}:README.md`, README_TITLE);
   for (const f of fs.existsSync(docsDir) ? fs.readdirSync(docsDir) : []) {
     if (!/\.md$/i.test(f)) continue;
     const t = splitTitle(fs.readFileSync(path.join(docsDir, f), 'utf8')).title;

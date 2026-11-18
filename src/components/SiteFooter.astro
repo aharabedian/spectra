@@ -1,12 +1,13 @@
 ---
-import { u, projects } from '../lib/site';
+import { u, projects, suite } from '../lib/site';
 ---
 <footer class="foot">
   <div class="foot-in">
     <div class="foot-grid">
       <div class="foot-brand">
-        <span class="snav-word">SPECTRA</span>
-        <p>PRISM, LENS and LUMEN: OpenComputers programs for running a GregTech: New Horizons base. By aharabedian.</p>
+        <span class="snav-word">{suite.name}</span>
+        <p class="foot-exp">{suite.expansion}</p>
+        <p>PRISM, LENS and LUMEN: OpenComputers programs for a GregTech: New Horizons base. By aharabedian.</p>
       </div>
       <nav aria-label="Projects">
         <span class="foot-h">Projects</span>
@@ -16,13 +17,13 @@ import { u, projects } from '../lib/site';
       </nav>
       <nav aria-label="Documentation">
         <span class="foot-h">Docs</span>
-        <a href={u('guide/')}>Putting the suite together</a>
+        <a href={u('docs/')}>All docs</a>
         {projects.map((p) => <a href={u(`${p.id}/docs/`)}>{p.name} docs</a>)}
       </nav>
       <nav aria-label="Source">
-        <span class="foot-h">Source</span>
+        <span class="foot-h">Source (GitHub)</span>
         {projects.map((p) => <a href={`https://github.com/${p.repo}`}>{p.repo}</a>)}
-        <a href="https://github.com/aharabedian/spectra">aharabedian/spectra</a>
+        <a href={`https://github.com/${suite.repo}`}>{suite.repo}</a>
       </nav>
     </div>
     <p class="foot-legal">MIT licensed. A fan project, not affiliated with GregTech: New Horizons, OpenComputers or Applied Energistics 2.</p>

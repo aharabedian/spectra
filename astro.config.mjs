@@ -1,15 +1,23 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { base, site, projects } from './spectra.config.mjs';
+import fs from 'node:fs';
+import { base, site, projects, suite } from './spectra.config.mjs';
+
+// The version each project's docs were built from (written by scripts/fetch-docs.mjs), for the sidebar.
+const built = fs.existsSync('./src/data/projects.json')
+  ? JSON.parse(fs.readFileSync('./src/data/projects.json', 'utf8'))
+  : {};
 
 export default defineConfig({
   site,
   base,
   trailingSlash: 'always',
+  // The suite guide's content moved into each project's docs; old links land on the home page's summary.
+  redirects: { '/guide/': `${base}#how-they-fit` },
   integrations: [
     starlight({
-      title: 'Spectra',
+      title: suite.name,
       description: 'PRISM, LENS and LUMEN: OpenComputers programs for running a GregTech: New Horizons base.',
       logo: { src: './src/assets/mark.svg', alt: '' },
       favicon: '/favicon.svg',
@@ -39,10 +47,20 @@ export default defineConfig({
         PageTitle: './src/components/starlight/PageTitle.astro',
       },
       routeMiddleware: './src/route-middleware.ts',
-      sidebar: [
-        { label: 'Spectra', items: [{ label: 'Putting the suite together', link: '/guide/' }] },
-        ...projects.map((p) => ({ label: p.name, items: [{ autogenerate: { directory: `${p.id}/docs` } }] })),
-      ],
+      // One sidebar for all the docs: a group per project, with the version its docs describe and its
+      // changelog on GitHub. Page order comes from spectra.config.mjs (fetch-docs writes it as frontmatter).
+      sidebar: projects.map((p) => ({
+        label: p.name,
+        badge: built[p.id] ? { text: `v${built[p.id].version}`, class: `sb-version sb-${p.id}` } : undefined,
+        items: [
+          { autogenerate: { directory: `${p.id}/docs` } },
+          {
+            label: 'Changelog',
+            link: `https://github.com/${p.repo}/blob/main/CHANGELOG.md`,
+            attrs: { class: 'sb-external', 'aria-label': `${p.name} changelog (GitHub)` },
+          },
+        ],
+      })),
       expressiveCode: {
         themes: ['github-dark-default'],
         styleOverrides: {

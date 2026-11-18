@@ -1,7 +1,7 @@
 ---
 // Dark only, and tag the page with its project so the accent color follows it (see starlight.css).
 import { projectOfDoc } from '../../lib/site';
-const project = projectOfDoc(Astro.locals.starlightRoute.id)?.id ?? 'suite';
+const project = projectOfDoc(Astro.locals.starlightRoute.id)?.id ?? 'none';
 ---
 <script is:inline define:vars={{ project }}>
   document.documentElement.dataset.theme = 'dark';
