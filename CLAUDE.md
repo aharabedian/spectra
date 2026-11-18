@@ -4,8 +4,8 @@ Guidance for Claude Code working in this repo. Keep it short and current; detail
 
 ## What this is
 
-The **Spectra** website: home page, landing pages for PRISM, LENS and LUMEN, the suite guide, and every
-project's docs. Astro + Starlight, deployed to GitHub Pages by `.github/workflows/deploy.yml`.
+The **SPECTRA** website (always capitals: *Suite of Programs for Engineering, Control, Telemetry, Routing &
+Automation*): home page, landing pages for PRISM, LENS and LUMEN, a generated docs index, and every project's docs. Astro + Starlight, deployed to GitHub Pages by `.github/workflows/deploy.yml`.
 
 ## Commands
 
@@ -26,8 +26,16 @@ SPECTRA_LOCAL=.. npm run fetch-docs   # use ../prism, ../lens, ../lumen working 
 - **Landing pages quote the projects; keep them true.** Check claims against the project's docs and code
   before writing them. `check-facts` fails on any quoted name (program, metric, config key, inline code)
   missing from the fetched docs; add to its `IGNORE` only for placeholders and example values.
-- **Every link goes through the base path:** `u('prism/')` in pages and components, relative links in
-  `src/content/docs/guide/`. `check-links` fails the build on a broken link or anchor.
+- **Every link goes through the base path:** `u('prism/')` in pages and components. `check-links` fails the
+  build on a broken link or anchor.
+- **Navigation is fixed:** the top bar is identical on every page and each label always goes to the same
+  place (logo → home, project → its landing page, Docs → the docs index). The docs sidebar lists all three
+  projects. Don't add links whose target depends on the page you're on.
+- **How the projects work together is documented in the projects** (PRISM's and LUMEN's *Reporting to
+  LENS*, LENS's *Connecting agents*), not here. The home page summarizes and links to them.
+- **Write plainly and precisely:** a number instead of an idiom, a term defined or linked where it first
+  appears on a page (agent, hub, lens/1), one name per thing, headings that say what the section holds
+  (not slogans). The project docs' Symptom | Fix and Part | Why tables are the standard.
 - **Look:** dark only; palette in `src/styles/tokens.css`; each project has one accent (PRISM orange,
   LENS blue, LUMEN green). Red and yellow mean bad and warn, nothing else. Landing pages keep their
   layout inline in the markup.

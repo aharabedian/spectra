@@ -1,17 +1,7 @@
 ---
-// Starlight's header, replaced by the site's two bars: the top bar (with Starlight's search in it) and
-// the project's sections, Docs current. The top bar's links stay in the docs (route-middleware.ts).
-import Search from '@astrojs/starlight/components/Search.astro';
+// Starlight's header, replaced by the site's top bar (the same one the landing pages use), with Docs current
+// (on the 404 page, nothing is).
 import SiteNav from '../SiteNav.astro';
-import SubNav from '../SubNav.astro';
-import { projectOfDoc, type Area } from '../../lib/site';
-const current = (projectOfDoc(Astro.locals.starlightRoute.id)?.id ?? 'suite') as Area;
+const notFound = Astro.locals.starlightRoute.id === '404';
 ---
-<div class="sl-bars">
-  <div class="sl-bar-top">
-    <SiteNav current={current} section="docs" docsHrefs={Astro.locals.spectraDocsHrefs}>
-      <div class="snav-search"><Search /></div>
-    </SiteNav>
-  </div>
-  <div class="sl-bar-sub"><SubNav current={current} section="docs" /></div>
-</div>
+<SiteNav current={notFound ? undefined : 'docs'} />

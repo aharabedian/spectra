@@ -1,4 +1,4 @@
-/* Starlight, dressed as Spectra. Colors come from tokens.css; each project's docs take its accent. */
+/* Starlight, dressed as SPECTRA. Colors come from tokens.css; each project's docs take its accent. */
 :root, :root[data-theme='dark'] {
   --sl-font: var(--sp-sans);
   --sl-font-mono: var(--sp-mono);
@@ -19,9 +19,7 @@
   --sl-color-accent-low: #10202F;
   --sl-color-accent: #8CCBFF;
   --sl-color-accent-high: #C2E3FF;
-  --sp-top-h: 3.5rem;
-  --sp-sub-h: 2.875rem;
-  --sl-nav-height: calc(var(--sp-top-h) + var(--sp-sub-h));
+  --sl-nav-height: var(--sp-top-h);
   --sl-content-width: 48rem;
   --sl-text-h1: 2.75rem;
   --sl-text-h2: 1.75rem;
@@ -31,22 +29,11 @@
 :root[data-project='lens']  { --sl-color-accent-low: #0E2236; --sl-color-accent: #5EB4FF; --sl-color-accent-high: #A9D6FF; }
 :root[data-project='lumen'] { --sl-color-accent-low: #0D2716; --sl-color-accent: #4FD17A; --sl-color-accent-high: #9BEBB5; }
 
-@media (min-width: 50rem) { :root { --sp-top-h: 4rem; } }
-
-/* The header: the site's top bar over the project's sections, each a full-width row */
-.header, [data-has-sidebar] .header { padding: 0; border-bottom-color: var(--sp-line-soft); }
-.sl-bars { height: 100%; display: flex; flex-direction: column; }
-.sl-bar-top { height: var(--sp-top-h); padding: 0 var(--sl-nav-pad-x); border-bottom: 1px solid var(--sp-line-soft); }
-.sl-bar-sub { flex: 1; padding: 0 var(--sl-nav-pad-x); background: var(--sp-bg-2); }
-.snav { flex-wrap: nowrap; }
-.snav-search { flex: 1; display: flex; justify-content: center; min-width: 0; }
-.sl-menu-button { top: calc((var(--sp-top-h) - var(--sl-menu-button-size)) / 2); }
+/* The header is the site's top bar (tokens.css), with room on the right for the menu button on phones */
+.header { padding-block: 0; border-bottom-color: var(--sp-line-soft); }
 @media (max-width: 50rem) {
-  [data-has-sidebar] .sl-bar-top { padding-inline-end: calc(var(--sl-nav-pad-x) + var(--sl-menu-button-size) + 0.5rem); }
-  .snav-search { flex: none; order: 3; }
-  .snav-search { margin-left: auto; }
+  [data-has-sidebar] .header { padding-inline-end: calc(var(--sl-nav-pad-x) + var(--sl-menu-button-size) + 0.25rem); }
 }
-@media (min-width: 50rem) and (max-width: 72rem) { .snav-gh { display: none; } }
 
 /* "On this page", quiet like the sidebar's group labels */
 #starlight__on-this-page { font-family: var(--sp-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
@@ -65,7 +52,15 @@
   box-shadow: inset 2px 0 0 var(--sl-color-accent);
 }
 .sidebar-content [aria-current='page'] .large { color: var(--sp-text); font-weight: 600; }
-.sidebar-content .group-label .large { font-family: var(--sp-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
+.sidebar-content .group-label .large { font-family: var(--sp-mono); font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-muted); }
+/* Each project's group: its name in its color, its version beside it, a gap above the next project */
+.sidebar-content .top-level > li + li { margin-top: 1rem; }
+.sidebar-content summary:has(.sb-prism) .large { color: var(--sp-prism); }
+.sidebar-content summary:has(.sb-lens) .large { color: var(--sp-lens); }
+.sidebar-content summary:has(.sb-lumen) .large { color: var(--sp-lumen); }
+.sidebar-content .sb-version { background: none; border: none; padding: 0; font-family: var(--sp-mono); font-size: 12px; font-weight: 400; color: var(--sp-muted); }
+/* Links that leave the site (each project's changelog) say so */
+.sidebar-content a.sb-external .large::after, .sidebar-content a.sb-external > span::after { content: ' ↗'; color: var(--sp-muted); }
 
 /* Content */
 .sl-markdown-content { font-size: 16.5px; line-height: 1.72; }

@@ -1,0 +1,55 @@
+---
+// /docs/: where the top bar's Docs link goes. Every project's docs pages and their sections, built from the
+// fetched docs themselves, so there's nothing here to keep up to date by hand. The sidebar beside it lists
+// the same pages; this page adds the sections, so you can see where something is before you open a page.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection, render } from 'astro:content';
+import { u, projects, version, changelog, type ProjectId } from '../../lib/site';
+
+const all = await getCollection('docs');
+const groups = await Promise.all(projects.map(async (p) => {
+  const entries = all
+    .filter((e) => e.id === `${p.id}/docs` || e.id.startsWith(`${p.id}/docs/`))
+    .sort((a, b) => (a.data.sidebar.order ?? 0) - (b.data.sidebar.order ?? 0));
+  const pages = await Promise.all(entries.map(async (e) => ({
+    title: e.data.title,
+    href: u(`${e.id}/`),
+    sections: (await render(e)).headings.filter((h) => h.depth === 2),
+  })));
+  return { p, pages };
+}));
+---
+<StarlightPage frontmatter={{ title: 'Docs', description: 'The docs for PRISM, LENS and LUMEN, page by page.', tableOfContents: false, pagefind: false }}>
+  <p>Each project's docs come from its own repository, at its latest release.</p>
+  {groups.map(({ p, pages }) => (
+    <section class="dx" style={`--dx: ${p.accent}`} aria-labelledby={`dx-${p.id}`}>
+      <h2 id={`dx-${p.id}`}><span class="dx-name">{p.name}</span> <span class="dx-ver">v{version(p.id as ProjectId)}</span></h2>
+      <p class="dx-exp">{p.expansion}</p>
+      <p>{p.summary} <a href={u(`${p.id}/`)}>About {p.name}</a> · <a href={changelog(p)}>Changelog (GitHub)</a></p>
+      <ul class="dx-pages">
+        {pages.map((pg) => (
+          <li>
+            <a class="dx-page" href={pg.href}>{pg.title}</a>
+            {pg.sections.length > 0 && (
+              <span class="dx-sections">{pg.sections.map((h, i) => <>{i > 0 && ' · '}<a href={`${pg.href}#${h.slug}`}>{h.text}</a></>)}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</StarlightPage>
+<style>
+  .dx { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--sp-line-soft); }
+  .dx h2 { margin: 0; display: flex; align-items: baseline; gap: 12px; }
+  .dx-name { font-family: var(--sp-mono); letter-spacing: 0.06em; color: var(--dx); }
+  .dx-ver { font-family: var(--sp-mono); font-size: 13px; font-weight: 400; color: var(--sp-muted); letter-spacing: 0; }
+  .dx-exp { margin-top: 0.25rem !important; font-family: var(--sp-mono); font-size: 13px; color: var(--sp-muted); }
+  .dx-pages { list-style: none; padding: 0; }
+  .dx-pages li { padding: 0.6rem 0; border-bottom: 1px solid var(--sp-line-soft); margin: 0 !important; }
+  .dx-page { font-weight: 600; color: var(--sp-text); text-decoration: none; }
+  .dx-page:hover { text-decoration: underline; }
+  .dx-sections { display: block; font-size: 14px; line-height: 1.6; color: var(--sp-faint); }
+  .dx-sections a { color: var(--sp-muted); text-decoration: none; }
+  .dx-sections a:hover { color: var(--sp-text); text-decoration: underline; }
+</style>

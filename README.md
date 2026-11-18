@@ -11,19 +11,20 @@
 </p>
 
 <p align="center">
-  <a href="https://aharabedian.github.io/spectra/"><b>Website and docs</b></a> ·
-  <a href="https://aharabedian.github.io/spectra/guide/">Putting the suite together</a>
+  <a href="https://aharabedian.github.io/spectra/"><b>Website</b></a> ·
+  <a href="https://aharabedian.github.io/spectra/docs/"><b>Docs</b></a>
 </p>
 
-SPECTRA is three small projects for [OpenComputers](https://github.com/GTNewHorizons/OpenComputers) in
-GregTech: New Horizons. Each runs on its own computer and is useful alone; turn on LENS reporting and
-PRISM and LUMEN show up on one dashboard and in your AR glasses.
+**SPECTRA** (*Suite of Programs for Engineering, Control, Telemetry, Routing & Automation*; also what a
+prism produces) is three programs for [OpenComputers](https://github.com/GTNewHorizons/OpenComputers) in
+GregTech: New Horizons. Each runs on its own computer and works alone. Turn on LENS reporting in PRISM and
+LUMEN, and both show up on one LENS dashboard and in AR glasses.
 
 | | Project | What it does | |
 |---|---|---|---|
 | 🟧 | **[PRISM](https://github.com/aharabedian/prism)**<br><sub>Programmable Routing & Item Sorting for ME</sub> | Routes items from an AE2 subnet to your machines by pattern rules, shares the load when one falls behind, and alerts on stalls. Touchscreen control panel | [Overview](https://aharabedian.github.io/spectra/prism/) · [Docs](https://aharabedian.github.io/spectra/prism/docs/) |
 | 🟦 | **[LENS](https://github.com/aharabedian/lens)**<br><sub>Live Engineering & Network Status</sub> | Gathers every system's health, metrics and alerts into one dashboard and an AR glasses HUD. Watches, never controls | [Overview](https://aharabedian.github.io/spectra/lens/) · [Docs](https://aharabedian.github.io/spectra/lens/docs/) |
-| 🟩 | **[LUMEN](https://github.com/aharabedian/lumen)**<br><sub>Load, Usage & Management of Energy Networks</sub> | Every Lapotronic Supercapacitor on one screen, with history and alerts that don't cry wolf; switches generators with the fill | [Overview](https://aharabedian.github.io/spectra/lumen/) · [Docs](https://aharabedian.github.io/spectra/lumen/docs/) |
+| 🟩 | **[LUMEN](https://github.com/aharabedian/lumen)**<br><sub>Load, Usage & Management of Energy Networks</sub> | Every Lapotronic Supercapacitor on one screen, with history and alerts for low power and fast drain; switches generators on and off by the fill | [Overview](https://aharabedian.github.io/spectra/lumen/) · [Docs](https://aharabedian.github.io/spectra/lumen/docs/) |
 
 Each installs with two lines on an OpenComputers computer with an Internet Card:
 
@@ -33,12 +34,12 @@ wget -f https://raw.githubusercontent.com/aharabedian/prism/main/src/prism-updat
 ```
 
 (`lens-update` and `lumen-update` the same way.) Lua 5.3 architecture, MIT licensed, and tested against a
-mocked OpenComputers, AE2 and GregTech world, so every screen on the site is a real render.
+simulated OpenComputers, AE2 and GregTech, so every screen on the site is drawn by the tests.
 
 ## About this repo
 
-This repo is the website: the home page, the three project landing pages, the suite guide and the styling.
-**Each project's docs stay in its own repo** (`README.md` and `docs/*.md`) and are pulled in when the site
+This repo is the website: the home page, the three project landing pages, the docs index and the styling.
+**Each project's docs stay in its own repo**, including how it works with the other two, (`README.md` and `docs/*.md`) and are pulled in when the site
 builds, so they're written once, read on GitHub or on the site, and never copied by hand. Built with
 [Astro](https://astro.build) and [Starlight](https://starlight.astro.build); published to GitHub Pages.
 
@@ -64,11 +65,12 @@ The nightly run and pushes to this repo rebuild too.
 
 | In the project repo | On the site |
 |---|---|
-| `README.md` | `/<id>/docs/`, titled *Overview* |
+| `README.md` | `/<id>/docs/`, titled *Introduction*, without its row of links to the site (Website · Docs · ...) |
 | `docs/setup.md` and its `# Setup` heading | `/<id>/docs/setup/`, titled *Setup* |
 | `[configuration.md](configuration.md#rules)` | a link to `/<id>/docs/configuration/#rules`; link text that's just a file name shows the page title |
 | `../config/prism.example.cfg`, `CONTRIBUTING.md`, anything else outside `docs/` | a link to the file on GitHub, at the release tag |
 | `https://github.com/aharabedian/lens/blob/main/docs/telemetry.md` | `/lens/docs/telemetry/` (links between the projects stay on the site) |
+| `https://github.com/aharabedian/spectra`, `https://aharabedian.github.io/spectra/...` | the site's own pages, checked by `check-links` |
 | `![...](images/x.png)` | an optimized image; also copied to `/shots/<id>/` for the landing pages |
 | `> [!NOTE]`, `> [!WARNING]`... (GitHub alerts) | a Starlight aside in the site's colors |
 
@@ -108,25 +110,30 @@ PRISM_REF=v1.1.0 npm run fetch-docs                      # one project from a gi
 
 | Path | What |
 |---|---|
-| `spectra.config.mjs` | The projects, their accent colors, sidebar order, and the site's base path |
-| `src/pages/` | Home (`index.astro`) and the landing pages (`prism/`, `lens/`, `lumen/`) |
-| `src/content/docs/guide/` | *Putting the suite together*, the one doc that lives here |
+| `spectra.config.mjs` | The suite's name and acronym, the projects (accent colors, one-line summaries, sidebar order), and the site's base path |
+| `src/pages/` | Home (`index.astro`), the landing pages (`prism/`, `lens/`, `lumen/`) and the docs index (`docs/`, generated from the docs) |
 | `src/content/docs/<id>/` | **Generated** by `fetch-docs`; git-ignored. Edit the docs in their own repo |
-| `src/components/` | `SiteNav` (top bar: the suite or a project, staying in Overview or Docs) and `SubNav` (that area's Overview, Docs, Changelog, Source), on every page |
-| `src/components/starlight/` | Starlight overrides: the header (both bars), the page title's crumb, dark-only theme |
-| `src/route-middleware.ts` | Gives each project's docs their own sidebar and previous/next links, and where the top bar's links go from a docs page (the same page in another project when it has one) |
+| `src/content/i18n/en.json` | Starlight UI labels we change ("On this page" starts at *Top*, not *Overview*) |
+| `src/components/SiteNav.astro` | The top bar, identical on every page: logo (home) on the left; PRISM, LENS, LUMEN (landing pages) and Docs centered; search and GitHub on the right |
+| `src/components/starlight/` | Starlight overrides: the header (the top bar), the line above each page title (project and version), dark-only theme |
+| `src/route-middleware.ts` | Keeps previous/next inside a project and names the project in the tab title. The sidebar (all three projects) is in `astro.config.mjs` |
 | `src/assets/mark.svg`, `public/` icons, `public/social/` | From the logo kit ("Hub"): the small mark for the top bar (30 px), `favicon.svg`/`.ico` and `apple-touch-icon.png`, and the Open Graph image |
 | `src/styles/` | `tokens.css` (palette, shared bits), `site.css` (landing pages), `starlight.css` (docs) |
 | `scripts/` | `fetch-docs.mjs`, `check-facts.mjs`, `check-links.mjs` |
 | `extras/project-repo/` | The workflow each project repo needs (below) |
 
 The landing pages are hand-written, so they can fall behind a project. `check-facts` catches the worst
-case: every program, metric, config key and inline-code name they (or the guide) quote must still appear
+case: every program, metric, config key and inline-code name they quote must still appear
 in some project's docs, or the build stops. Prose, numbers and screenshot captions aren't checked: when a
 release changes what a landing page describes, update the page.
 
 The landing pages' screenshots come from `/shots/<id>/`, the images fetched with the docs, so they update
 when the projects re-render their screens. Version numbers come from the release tags.
+
+How PRISM, LENS and LUMEN work together is documented in the projects' own docs (PRISM's and LUMEN's
+*Reporting to LENS*, LENS's *Connecting agents*), so it's released with the code it describes. The home
+page's *How they fit* section only summarizes and links there; `/guide/`, where a suite guide used to be,
+redirects to it.
 
 ### Publishing
 
