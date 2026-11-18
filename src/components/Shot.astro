@@ -1,0 +1,33 @@
+---
+// A screenshot from a project's docs (/shots/<id>/...), whole or cropped to the part a section talks about,
+// so its text stays readable: a 160-column screen needs the page's full width, half a page fits about 80.
+// The crop is done with CSS; the image is the one the project renders, so it updates with its releases.
+//   <Shot src="prism/dashboard.png" alt="..." size={[1280, 800]} />
+//   <Shot src="prism/rule-editor.png" alt="..." size={[1280, 800]} cells={[91, 2, 69, 19]} />
+// size: the image in pixels. cells: [column, row, columns, rows] of a screen render (8 × 16 px per cell);
+// crop: the same in pixels, for anything else. A project that moves things on a screen moves the crop: look
+// at the page after a release that changes a screen.
+import { u } from '../lib/site';
+interface Props {
+  src: string;
+  alt: string;
+  size: [number, number];
+  cells?: [number, number, number, number];
+  crop?: [number, number, number, number];
+  framed?: boolean;
+  style?: string;
+}
+const { src, alt, size, cells, crop, framed = true, style = '' } = Astro.props;
+const [W, H] = size;
+const [x, y, w, h] = cells ? [cells[0] * 8, cells[1] * 16, cells[2] * 8, cells[3] * 16] : crop ?? [0, 0, W, H];
+const pct = (n: number) => `${+(n * 100).toFixed(4)}%`;
+---
+<div class:list={['shot', { framed }]} style={`aspect-ratio: ${w} / ${h}; ${style}`}>
+  <img src={u(`shots/${src}`)} alt={alt} loading="lazy" decoding="async" width={W} height={H}
+    style={`width: ${pct(W / w)}; margin-left: -${pct(x / w)}; margin-top: -${pct(y / w)}`} />
+</div>
+<style>
+  .shot { overflow: hidden; background: var(--sp-code-bg); }
+  .shot.framed { border: 1px solid var(--sp-line); border-radius: 10px; }
+  .shot img { display: block; max-width: none !important; height: auto; }
+</style>

@@ -1,13 +1,14 @@
 ---
 import Site from '../../layouts/Site.astro';
+import Shot from '../../components/Shot.astro';
 import { u, version, changelog, project } from '../../lib/site';
 const p = project('lens')!;
 ---
 <Site title={'LENS: Live Engineering & Network Status'} description={'Monitoring for GregTech: New Horizons on OpenComputers: what PRISM, LUMEN and your own programs report, on one screen and in AR glasses.'} active="lens">
 <main>
 
-<section aria-labelledby="hero" style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
-<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<section aria-labelledby="hero" style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 72px; display: flex; flex-direction: column; gap: 48px">
+<div style="max-width: 860px; display: flex; flex-direction: column; gap: 22px">
 <div style="display: flex; align-items: center; gap: 14px">
 <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><path d="M0 6 L18 21" stroke="#FF9F43" stroke-width="2"/><path d="M0 22 L18 22" stroke="#4FD17A" stroke-width="2"/><path d="M0 38 L18 23" stroke="#C9D1D9" stroke-width="2" stroke-dasharray="3 3"/><path d="M22 4 C 29 14, 29 30, 22 40 C 15 30, 15 14, 22 4 Z" fill="#5EB4FF" fill-opacity="0.12" stroke="#5EB4FF" stroke-width="2"/><path d="M26 22 H40" stroke="#5EB4FF" stroke-width="2.5"/><circle cx="41" cy="22" r="3" fill="#5EB4FF"/></svg>
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #8CCBFF">Live Engineering &amp; Network Status</span>
@@ -22,14 +23,15 @@ const p = project('lens')!;
 <span>v{version('lens')}</span><span style="color: #3A444F">/</span><span>MIT licensed</span><span style="color: #3A444F">/</span><a href={changelog(p)}>Changelog (GitHub)</a>
 </div>
 </div>
-<figure style="flex: 1 1 560px; min-width: 0; margin: 0">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
 <div style="background: #0F1317; border: 1px solid #232A32; border-radius: 12px; overflow: hidden">
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1C2229; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">
-<span>lens-hub — 1 node, 1 alert</span>
+<span>lens-hub — 5 nodes, 3 alerts</span>
 <span style="color: #FF5C5C">BAD</span>
 </div>
-<img src={u("shots/lens/dashboard.png")} alt="The LENS hub: the prism-ore node in BAD health, an alert that mac2 has no power, and panels for ore backlog, machines down and machines running" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800">
+<Shot src="lens/dashboard.png" size={[1280, 800]} cells={[0, 0, 160, 36]} framed={false} alt="The LENS hub: five agents (three PRISM routers, a LUMEN power room and a tree farm), three alerts with EBF 3 out of power at the top, and sixteen panels with bars, a dot per machine and sparklines" />
 </div>
+<figcaption style="font-size: 13.5px; color: #9AA5B1">Three PRISM routers, LUMEN and a tree farm (a program of your own) reporting. EBF 3 has no power, so the hub shows BAD until it's fixed.</figcaption>
 </figure>
 </section>
 
@@ -42,7 +44,10 @@ const p = project('lens')!;
 </div>
 <p style="flex: 1 1 380px; margin: 0; font-size: 17px; line-height: 1.65; color: #B7C0C9">Needs the OC Glasses mod: a Glasses Terminal next to the hub computer, with your glasses linked to it. Bars, text lines and the newest alerts sit where you place them, and a thin strip down the side shows the base's overall health. <a href={u("lens/docs/hud/")}>The AR glasses HUD →</a></p>
 </div>
-<img src={u("shots/lens/hud-blocks.png")} alt="Three HUD blocks over a Minecraft dirt texture: power at 95 percent with net plus 2.4k EU/t and two alerts at the top, an ore backlog of 1.2M in the middle, and LENS OK in the corner" style="display: block; width: 100%; height: auto; aspect-ratio: 2430 / 1251; border-radius: 12px; border: 1px solid #232A32">
+<figure style="margin: 0; max-width: 642px; display: flex; flex-direction: column; gap: 10px">
+<Shot src="lens/hud.png" size={[642, 372]} alt="A HUD block over the game world: bars for the LSCs and the ore backlog, net EU/t, a dot per machine before the ore line and EBF line labels, and the three newest alerts" />
+<figcaption style="font-size: 13.5px; color: #9AA5B1">One block: two bars, a value, a dot per machine (here before the label) and the newest alerts.</figcaption>
+</figure>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 40px">
 <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">A HUD for each player</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">Each player links their glasses to their own terminal, and the hub places each HUD for its wearer's view.</p></div>
 <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #232A32"><h3 style="margin: 0; font-size: 17px; font-weight: 600">Up to 8 presets</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">One for the base, one for mining, one for power. Switch between them from the dashboard.</p></div>
@@ -92,10 +97,9 @@ const p = project('lens')!;
 <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B7C0C9">EDIT pages and panels with a keyboard, previewed as you type. Tap an alert to acknowledge it; LOG shows what happened while you were away.</p>
 </div>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/lens/data.png")} alt="The DATA page listing every metric the agents send" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">DATA: build a query by tapping</figcaption></figure>
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/lens/view-editor.png")} alt="The view editor with a typed query and a live preview" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">EDIT: a view, previewed as you type</figcaption></figure>
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src={u("shots/lens/log.png")} alt="The alert log with alerts happening now and alerts that have ended" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; border-radius: 10px; border: 1px solid #232A32"><figcaption style="font-size: 13.5px; color: #9AA5B1">LOG: what happened while you were away</figcaption></figure>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 24px; align-items: start">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><Shot src="lens/data.png" size={[1280, 800]} cells={[0, 0, 92, 17]} alt="The DATA page: the metrics the agents send on the left; for lumen_net_5m_eut, buttons to pick a node, an LSC and how to combine them, the query this builds, its value, and SAVE AS PANEL and ADD TO MY HUD" /><figcaption style="font-size: 13.5px; color: #9AA5B1">DATA: pick a metric and tap to build its query</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><Shot src="lens/view-editor-rules.png" size={[1280, 800]} cells={[0, 0, 92, 26]} alt="The view editor: label, query and format fields, two status rules (bad while a machine is down, good while one runs), and the current value with its dot" /><figcaption style="font-size: 13.5px; color: #9AA5B1">EDIT: a view with status rules, previewed as you type</figcaption></figure>
 </div>
 </div>
 </section>

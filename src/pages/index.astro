@@ -1,12 +1,13 @@
 ---
 import Site from '../layouts/Site.astro';
+import Shot from '../components/Shot.astro';
 import { u, version, suite } from '../lib/site';
 ---
 <Site title={`${suite.name}: PRISM, LENS and LUMEN for GregTech: New Horizons`} description={'OpenComputers programs for GregTech: New Horizons: route items from AE2 to your machines, monitor your power, and see both on one screen.'} active="home">
 <main>
 
-<section aria-labelledby="hero-title" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
-<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section aria-labelledby="hero-title" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px 72px; display: flex; flex-direction: column; gap: 48px">
+<div style="max-width: 860px; display: flex; flex-direction: column; gap: 24px">
 <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #AEB8C2">{suite.name} · {suite.expansion}</p>
 <h1 id="hero-title" style="margin: 0; font-size: 60px; line-height: 1.04; font-weight: 700; letter-spacing: -0.025em">Route the items.<br><span style="color: #4FD17A">Watch the power.</span><br><span style="color: #5EB4FF">See the whole base.</span></h1>
 <p style="margin: 0; font-size: 19px; line-height: 1.6; color: #B7C0C9; max-width: 560px">Three Lua programs for OpenComputers in GregTech: New Horizons. <strong style="color: #FF9F43; font-weight: 600">PRISM</strong> routes items from your AE2 subnet to your machines. <strong style="color: #4FD17A; font-weight: 600">LUMEN</strong> monitors your Lapotronic Supercapacitors and switches generators. <strong style="color: #5EB4FF; font-weight: 600">LENS</strong> shows what the other two report, on one screen and in AR glasses. Each works on its own.</p>
@@ -18,18 +19,18 @@ import { u, version, suite } from '../lib/site';
 <span>Lua 5.3</span><span style="color: #3A444F">/</span><span>MIT licensed</span><span style="color: #3A444F">/</span><span>Tested against a simulated game</span>
 </div>
 </div>
-<figure style="flex: 1 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 14px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div class="hero-shot">
 <div style="background: #0F1317; border: 1px solid #232A32; border-radius: 12px; overflow: hidden">
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1C2229; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA5B1">
 <span>lens-hub — tier 3 screen, 160 × 50</span>
 <span style="display: inline-flex; align-items: center; gap: 6px; color: #5EB4FF"><span style="width: 7px; height: 7px; border-radius: 50%; background: #5EB4FF"></span>LIVE</span>
 </div>
-<img src={u("shots/lens/dashboard.png")} alt="The LENS hub dashboard: one PRISM node in BAD health, an alert for a machine with no power, and panels for ore backlog and machines running" style="display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800">
+<Shot src="lens/dashboard.png" size={[1280, 800]} cells={[0, 0, 160, 36]} framed={false} alt="The LENS hub: three PRISM routers, a LUMEN power room and a tree farm reporting, three alerts with EBF 3 out of power at the top, and sixteen panels with bars, a dot per machine and sparklines" />
 </div>
-<figcaption style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
-<img src={u("shots/lens/hud-alerts.png")} alt="The LENS AR glasses HUD over a Minecraft dirt wall: an ore backlog bar and two alerts" style="width: 260px; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #232A32">
-<span style="flex: 1 1 200px; font-size: 14px; line-height: 1.55; color: #9AA5B1">The LENS dashboard, and the same alerts in AR glasses (the OC Glasses mod). Every screen on this site is drawn by the projects' tests, not mocked up.</span>
-</figcaption>
+<div class="hero-hud"><Shot src="lens/hud.png" size={[642, 372]} alt="The same base in AR glasses: bars for the LSCs and the ore backlog, a dot per machine, and the three newest alerts" /></div>
+</div>
+<figcaption style="font-size: 14px; line-height: 1.55; color: #9AA5B1">The LENS hub with PRISM, LUMEN and a tree farm reporting, and the same base in AR glasses (the OC Glasses mod). Every screen on this site is drawn by the projects' tests, not mocked up.</figcaption>
 </figure>
 </section>
 

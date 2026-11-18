@@ -59,3 +59,8 @@ table.t tr:last-child td { border-bottom: none; }
   .site h1 { font-size: 40px !important; }
   .site h2 { font-size: 30px !important; }
 }
+
+/* Home hero: the hub's screen, with the glasses HUD over its corner (below it on a phone) */
+.hero-shot { position: relative; }
+.hero-hud { position: absolute; right: 16px; bottom: 16px; width: min(34%, 400px); filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.7)); }
+@media (max-width: 760px) { .hero-hud { position: static; width: 100%; margin-top: 12px; filter: none; } }
