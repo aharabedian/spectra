@@ -115,6 +115,7 @@ PRISM_REF=v1.1.0 npm run fetch-docs                      # one project from a gi
 | `src/content/docs/<id>/` | **Generated** by `fetch-docs`; git-ignored. Edit the docs in their own repo |
 | `src/content/i18n/en.json` | Starlight UI labels we change ("On this page" starts at *Top*, not *Overview*) |
 | `src/components/SiteNav.astro` | The top bar, identical on every page: logo (home) on the left; PRISM, LENS, LUMEN (landing pages) and Docs centered; search and GitHub on the right |
+| `src/components/Shot.astro` | A project's screenshot on a landing page, whole or cropped to a region in screen cells (8 × 16 px), so its text stays readable. Crops follow the project's layout: check them after a release that changes a screen |
 | `src/components/starlight/` | Starlight overrides: the header (the top bar), the line above each page title (project and version), dark-only theme |
 | `src/route-middleware.ts` | Keeps previous/next inside a project and names the project in the tab title. The sidebar (all three projects) is in `astro.config.mjs` |
 | `src/assets/mark.svg`, `public/` icons, `public/social/` | From the logo kit ("Hub"): the small mark for the top bar (30 px), `favicon.svg`/`.ico` and `apple-touch-icon.png`, and the Open Graph image |
@@ -128,7 +129,8 @@ in some project's docs, or the build stops. Prose, numbers and screenshot captio
 release changes what a landing page describes, update the page.
 
 The landing pages' screenshots come from `/shots/<id>/`, the images fetched with the docs, so they update
-when the projects re-render their screens. Version numbers come from the release tags.
+when the projects re-render their screens. Each project draws its README images from a busy scene in its tests
+(`test_showcase.lua`, `make docs-images`), so they show a full base rather than a test's few items. Version numbers come from the release tags.
 
 How PRISM, LENS and LUMEN work together is documented in the projects' own docs (PRISM's and LUMEN's
 *Reporting to LENS*, LENS's *Connecting agents*), so it's released with the code it describes. The home
